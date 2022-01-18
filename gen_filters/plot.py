@@ -52,8 +52,8 @@ def plot_fr2(y,fcut,ntaps,fs):
     plt.ylim(-90, 5)
     plt.grid(True)
     plt.legend()
-    plt.xlabel('Frequency (Hz)')
-    plt.ylabel('Gain')
+    plt.xlabel('Частота (Гц)')
+    plt.ylabel('Коефф передачи')
     plt.title('АЧХ FIR ФНЧ, %d  Гц %d taps, fs = %d Hz' % (fcut, ntaps, fs))
 
     file_name = str("FIR_" + str(fcut) + ".png")
