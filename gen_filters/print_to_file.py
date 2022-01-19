@@ -1,7 +1,7 @@
 import os
 from const import*
 
-def prn_headers(y, freqs, len_tabs,fs):
+def prn_headers(y, freqs, len_tabs, fs, text):
 
     str1 = "#ifndef __FIR_"+ str(freqs)+"_H__"
     str2 = "#define __FIR_"+ str(freqs)+"_H__"
@@ -17,7 +17,7 @@ def prn_headers(y, freqs, len_tabs,fs):
     head = (str1, str2, str3, str4, str5, str6, str7)
 
     directory_path = "./Headers"
-    file_path = os.path.join(directory_path, "FIR_" + str(freqs)+ "_" + str(fs) + ".h")
+    file_path = os.path.join(directory_path, "FIR_" + str(freqs)+ "_" + str(fs) + str(text) + ".h")
 
     out_file = open(file_path,"wt")
     for i in range (len(head)):
@@ -61,7 +61,7 @@ def prn_headers(y, freqs, len_tabs,fs):
     out_file.close
 
 
-def prn_model_files(y, freqs, len_tabs,fs):
+def prn_model_files(y, freqs, len_tabs,fs,text):
 
     str4 = "#LENGTH_FIR_"+str(freqs)+" Hz "+str(len_tabs)+ " taps"
     str5 = "#fs = " + " " + str(fs) + " Hz"
@@ -72,7 +72,7 @@ def prn_model_files(y, freqs, len_tabs,fs):
     head = (str4, str5, str9)
 
     directory_path = "../trc3_model/FIR_models/"
-    file_path = os.path.join(directory_path, "FIR_" + str(freqs)+ ".py")
+    file_path = os.path.join(directory_path, "FIR_" + str(freqs)+ str(text) +".py")
 
     out_file = open(file_path,"wt")
     for i in range (len(head)):
