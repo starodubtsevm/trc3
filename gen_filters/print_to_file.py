@@ -3,12 +3,12 @@ from const import*
 
 def prn_headers(y, freqs, len_tabs, fs, text):
 
-    str1 = "#ifndef __FIR_"+ str(freqs)+"_H__"
-    str2 = "#define __FIR_"+ str(freqs)+"_H__"
+    str1 = "#ifndef __FIR_"+ str(freqs)+str(text)+"_H__"
+    str2 = "#define __FIR_"+ str(freqs)+str(text)+"_H__"
     str3 = ""
-    str4 = "#define LENGTH_FIR_"+str(freqs)+"    "+str(len_tabs)
+    str4 = "#define LENGTH_FIR_"+str(freqs)+str(text)+"    "+str(len_tabs)
     str5 = ""
-    str6 = "static fract16 fir"+ str(freqs)+"coeff[LENGTH_FIR_"+str(freqs)+"] ="
+    str6 = "static fract16 fir"+ str(freqs)+"coeff"+str(text)+"[LENGTH_FIR_"+str(freqs)+str(text)+"] ="
     str7 = "{"
     str8 = "};"
     str9 = ""
