@@ -4,6 +4,7 @@ import timeit
 def goertzel(samples, sample_rate):
 
     window_size = len(samples)
+    f_step_normalized = 1.0 / window_size
 
     #bins = {15,25,35,45,55,65}# 4000 Hz 800 taps 2.4 10
     #bins = {3,5,7,9,11,13}# 4000 Hz 160 taps 0.1 0.15 0.4
@@ -60,6 +61,7 @@ if __name__ == '__main__':
 
     # applying Goertzel on those signals, and plotting results
     freqs, results = goertzel(sine_wave, SAMPLE_RATE)
+
 
     pylab.subplot(2, 2, 1)
     pylab.title('Sine wave 75Hz+125Hz+325Hz (after Hann)')

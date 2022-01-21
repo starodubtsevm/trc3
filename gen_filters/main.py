@@ -26,17 +26,18 @@ fs_KRLi = 2000
 #-фильтры 8 и 12 Гц
 freqs_MOD = 8, 12
 band_MOD = 2
-<<<<<<< HEAD
 ntaps_MOD = 80
-=======
-ntaps_MOD = 75
->>>>>>> 3c066e17c7221ceec3e5840ad59fb93a8ad1e25d
 fs_MOD = 100
 
 #-ФНЧ
 LPF_cut = 15				# частота среза фнч после детектора
 ntaps_LPF = 100				# порядок фильтра
 fs_LPF = 100
+
+# ФНЧ на вых генератора
+LPFg_cut = 850				# частота среза фнч после генераторов
+ntaps_LPFg = 100				# порядок фильтра
+fs_LPFg = 8000
 
 #--------------------------------------------------------------------------
 res = []
@@ -93,5 +94,14 @@ res.append(y)
 prn_headers(y,0, len(taps_LPF),fs_LPF,'')		# формирование *.h файлов
 prn_model_files(y,LPF_cut, len(taps_LPF),fs_LPF,'')	# формирование *.py файлов
 plot_fr2(y, LPF_cut, ntaps_LPF,fs_LPF,'')		# формирование графиков АЧХ
+
+#-расчет и формирование *.h файлов фильтра низких частот (ФНЧ)-после генераторов-----------
+taps_LPFg = lpf_fir(ntaps_LPFg, LPFg_cut,fs_LPFg)
+y = [int(taps_LPFg[i] * 32768) for i in range(len(taps_LPFg))]
+res.append(y)
+
+prn_headers(y,0, len(taps_LPFg),fs_LPFg,'')		# формирование *.h файлов
+prn_model_files(y,LPFg_cut, len(taps_LPFg),fs_LPFg,'')	# формирование *.py файлов
+plot_fr2(y, LPFg_cut, ntaps_LPFg,fs_LPFg,'')		# формирование графиков АЧХ
 
 
