@@ -1,3 +1,4 @@
+import timeit
 import sys
 sys.path.append('./FIR_models')
 

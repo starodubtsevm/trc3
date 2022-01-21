@@ -3,7 +3,9 @@ from calc import*
 from plot import*
 from print_to_file import*
 from print_to_file2 import*
-import os
+import time
+
+
 
 #-входной (канальный фильтр)
 freqs_KRL = 420, 480, 565, 720, 780		# частоты фильтра КРЛ
@@ -26,11 +28,7 @@ fs_KRLi = 2000
 #-фильтры 8 и 12 Гц
 freqs_MOD = 8, 12
 band_MOD = 2
-<<<<<<< HEAD
 ntaps_MOD = 80
-=======
-ntaps_MOD = 75
->>>>>>> 3c066e17c7221ceec3e5840ad59fb93a8ad1e25d
 fs_MOD = 100
 
 #-ФНЧ
@@ -40,6 +38,7 @@ fs_LPF = 100
 
 #--------------------------------------------------------------------------
 res = []
+start_time = time.clock()
 
 #-расчет и формирование *.h файлов входных фильтров-КРЛ---------------------
 for i in range (len(freqs_KRL)):
@@ -52,6 +51,7 @@ for i in range (len(freqs_KRL)):
 	prn_model_files(y,freqs_KRL[i], len(taps_KRL),fs_KRL,'')	# формирование *.py файлов
 	plot_fr(y, freqs_KRL[i], band_KRL, ntaps_KRL,fs_KRL,'')	# формирование графиков АЧХ
 
+
 #-расчет и формирование *.h файлов измерительных фильтров-КРЛ---------------------
 for i in range (len(freqs_KRLi)):
 	taps_KRLi = bpf_fir(ntaps_KRLi, freqs_KRLi[i] - band_KRLi/2,
@@ -62,6 +62,8 @@ for i in range (len(freqs_KRLi)):
 	prn_headers(y,freqs_KRLi[i], len(taps_KRLi),fs_KRLi,'i')	# формирование *.h файлов
 	prn_model_files(y,freqs_KRLi[i], len(taps_KRLi),fs_KRLi,'i')	# формирование *.py файлов
 	plot_fr(y, freqs_KRLi[i], band_KRLi, ntaps_KRLi,fs_KRLi,'i')	# формирование графиков АЧХ
+
+print(time.clock() - start_time, "seconds")
 
 #-расчет и формирование *.h файлов измерительных фильтров-АРС---------------------
 for i in range (len(freqs_ARS)):
