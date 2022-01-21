@@ -36,7 +36,7 @@ def plot_fr(y,freqs,band,ntaps,fs,text):
 
 def plot_fr2(y,fcut,ntaps,fs,text):
 
-
+    print("я здесь")
     fig = plt.figure(1, figsize=(12, 9))
     plt.clf()
 
@@ -57,6 +57,6 @@ def plot_fr2(y,fcut,ntaps,fs,text):
     plt.title('АЧХ FIR ФНЧ, %d  Гц %d taps, fs = %d Hz' % (fcut, ntaps, fs))
 
     file_name = str("FIR_" + str(fcut) + str(text)+ ".png")
-
+    print (file_name)
     plt.savefig('./Graphics/'+ file_name)
     plt.clf()

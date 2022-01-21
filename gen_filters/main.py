@@ -2,8 +2,7 @@ import numpy as np
 from calc import*
 from plot import*
 from print_to_file import*
-from print_to_file2 import*
-import os
+
 
 #-входной (канальный фильтр)
 freqs_KRL = 420, 480, 565, 720, 780		# частоты фильтра КРЛ
@@ -91,16 +90,16 @@ taps_LPF = lpf_fir(ntaps_LPF, LPF_cut,fs_LPF)
 y = [int(taps_LPF[i] * 32768) for i in range(len(taps_LPF))]
 res.append(y)
 
-prn_headers(y,0, len(taps_LPF),fs_LPF,'')		# формирование *.h файлов
+prn_headers(y,LPF_cut, len(taps_LPF),fs_LPF,'')		# формирование *.h файлов
 prn_model_files(y,LPF_cut, len(taps_LPF),fs_LPF,'')	# формирование *.py файлов
 plot_fr2(y, LPF_cut, ntaps_LPF,fs_LPF,'')		# формирование графиков АЧХ
 
-#-расчет и формирование *.h файлов фильтра низких частот (ФНЧ)-после генераторов-----------
+#-расчет и формирование *.h файлов ФНЧ на выходе генераторов------------
 taps_LPFg = lpf_fir(ntaps_LPFg, LPFg_cut,fs_LPFg)
 y = [int(taps_LPFg[i] * 32768) for i in range(len(taps_LPFg))]
 res.append(y)
 
-prn_headers(y,0, len(taps_LPFg),fs_LPFg,'')		# формирование *.h файлов
+prn_headers(y,LPFg_cut, len(taps_LPFg),fs_LPFg,'')		# формирование *.h файлов
 prn_model_files(y,LPFg_cut, len(taps_LPFg),fs_LPFg,'')	# формирование *.py файлов
 plot_fr2(y, LPFg_cut, ntaps_LPFg,fs_LPFg,'')		# формирование графиков АЧХ
 
