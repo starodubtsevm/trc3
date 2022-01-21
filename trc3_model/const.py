@@ -2,7 +2,7 @@ import numpy as np
 
 fs = 8000.0														# main sampling frequency
 fs2 = 100.0														# sampling frequency 2
-t_sim = 3		 												# time of simulation
+t_sim = 2		 												# time of simulation
 sim_point = int(t_sim/(1.0/fs))
 sim_point2 = int(t_sim/(1.0/fs2))
 t = np.linspace(0, t_sim, sim_point)

@@ -1,4 +1,6 @@
 import matplotlib.pyplot as plt
+from scipy import fft, arange
+import numpy as np
 import const as c
 
 def to_plot (out_buffers, inp_signal_buff):
@@ -53,23 +55,17 @@ def to_plot (out_buffers, inp_signal_buff):
 
 	plt.show()
 
-def to_plotSpectrum(y):
+def plotSpectrum(y):
+	"""
+	Function to plot the time domain and frequency domain signal
+	"""
+	plt.ylim(0, 80)
+	plt.xlim(0, 1000)
+	plt.grid(True)
+	plt.legend()
+	plt.magnitude_spectrum(y, Fs=c.fs, scale='dB')
+	plt.ylabel('Уровень (dB)')
+	plt.xlabel('Частота (Hz)')
 
-	n = len(y) # length of the signal
-	k = arange(n)
-	T = n/fs
-	frq = k/T # two sides frequency range
-	frq = frq[range(n//2)] # one side frequency range
-	Y = fft(y)/n # fft computing and normalization
-	Y = Y[range(n//2)]
-
-	plt.subplot(2,1,1)
-	plt.plot(t, y)
-	plt.xlabel('Time')
-	plt.ylabel('Amplitude')
-
-	plt.subplot(2,1,2)
-	plt.plot(frq, abs(Y),'r') # plotting the spectrum
-	plt.xlabel('Freq (Hz)')
-	plt.ylabel('|Y(freq)|')
+	plt.show()
 

@@ -17,7 +17,7 @@ def plotSpectrum(y,Fs):
 	Y = Y[range(n//2)]
  
 	plot(frq,abs(Y),'r') # plotting the spectrum
-	xlabel('Freq (Hz)')
+	xlabel('Freq (Hz)')S
 	ylabel('|Y(freq)|')
 
 Fs = 150.0;  # sampling rate
@@ -25,7 +25,7 @@ Ts = 1.0/Fs; # sampling interval
 t = arange(0,1,Ts) # time vector
 
 ff = 5;   # frequency of the signal
-y = sin(2*pi*ff*t)
+y = sin(2*pi*ff*t)S
 
 subplot(2,1,1)
 plot(t,y)

@@ -2,13 +2,8 @@ import numpy as np
 from calc import*
 from plot import*
 from print_to_file import*
-<<<<<<< HEAD
 from print_to_file2 import*
 import time
-
-
-=======
->>>>>>> 634d8e28b209609ed55356b0270ae8b9a1a5ba68
 
 #-входной (канальный фильтр)
 freqs_KRL = 420, 480, 565, 720, 780		# частоты фильтра КРЛ
