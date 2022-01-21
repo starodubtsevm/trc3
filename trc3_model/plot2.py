@@ -60,9 +60,9 @@ def plotSpectrum(y):
 	Function to plot the time domain and frequency domain signal
 	"""
 	plt.ylim(0, 80)
-	plt.xlim(0, 1000)
+	plt.xlim(0, 2000)
 	plt.grid(True)
-	plt.legend()
+	#plt.legend()
 	plt.magnitude_spectrum(y, Fs=c.fs, scale='dB')
 	plt.ylabel('Уровень (dB)')
 	plt.xlabel('Частота (Hz)')
