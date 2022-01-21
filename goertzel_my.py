@@ -62,6 +62,7 @@ if __name__ == '__main__':
     # applying Goertzel on those signals, and plotting results
     freqs, results = goertzel(sine_wave, SAMPLE_RATE)
 
+
     pylab.subplot(2, 2, 1)
     pylab.title('Sine wave 75Hz+125Hz+325Hz (after Hann)')
     pylab.plot(t, sine_wave)
