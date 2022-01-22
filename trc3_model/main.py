@@ -7,28 +7,23 @@ import time
 from sig_gen import*
 
 start_time = time.time()
-
+print ("preparing signals")
 #-Start Model config----------------------------
 out_buffers = [[],[],[],[],[],[],[],[],[],[],[]]
 
 #-Track line circuit---------------------------
 krl_rec  = krl_receiver(565, 12) 				# rec krl signal
-print("--- %s seconds -krl_rec--" % (time.time() - start_time))
 
 krl_gen  = gen(565, 3500, 12)				# gen krl signal
-print("--- %s seconds -krl_gen--" % (time.time() - start_time))
 #-Interferences-------------------------------
-krl_gen  = gen(480, 3500, 1)					# gen krl signal2
-print("--- %s seconds -krl_gen2--" % (time.time() - start_time))
+krl_gen  = gen(480, 0, 1)					# gen krl signal2
 
 ars_gen1 = gen(75, 3500)					# gen ars signal1
-print("--- %s seconds -ars_gen--" % (time.time() - start_time))
 
 ars_gen2 = gen(125, 3500)					# gen ars signal2
-print("--- %s seconds -ars_gen2--" % (time.time() - start_time))
 
 noise_gen = white_noise(0)						# gen noise signal
-print("--- %s seconds -noise_gen--" % (time.time() - start_time))
+print("--- %s seconds -end preparing--" % (time.time() - start_time))
 #-End Model config----------------------------
 
 #-Start Main loop------------------------------
