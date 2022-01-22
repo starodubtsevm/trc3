@@ -9,27 +9,23 @@ from sig_gen import*
 start_time = time.time()
 print ("preparing signals")
 #-Start Model config----------------------------
-
-out_buffers = []
-[out_buffers.append([]) for i in range (11)]
+out_buffers = [[],[],[],[],[],[],[],[],[],[],[]]
 
 #-Track line circuit---------------------------
-krl_rec  = krl_receiver(420, 12) 				# rec krl signal
-krl_gen  = gen(565, 3500, 12)				# gen krl signal
+krl_rec  = krl_receiver(565, 12) 				# rec krl signal
 
+krl_gen  = gen(565, 3500, 12)				# gen krl signal
 #-Interferences-------------------------------
-krl_gen  = gen(480, 3500, 8)					# gen krl signal2
-krl_gen  = gen(420, 1700, 12)					# gen krl signal3
-krl_gen  = gen(720, 1700, 8)					# gen krl signal4
+krl_gen  = gen(480, 0, 1)					# gen krl signal2
 
 ars_gen1 = gen(75, 3500)					# gen ars signal1
-ars_gen2 = gen(125, 3500)					# gen ars signal2
-noise_gen = white_noise(0)						# gen noise signal
 
+ars_gen2 = gen(125, 3500)					# gen ars signal2
+
+noise_gen = white_noise(0)						# gen noise signal
+print ("--- %s seconds -end preparing--" % (time.time() - start_time))
 print ("")
 #-End Model config----------------------------
-print ("--- %s seconds -end preparing--" % (time.time() - start_time))
-
 
 #-Start Main loop------------------------------
 count_decimation = 0
@@ -67,5 +63,5 @@ to_plot (out_buffers, c.inp_signal_buff)
 
 plotSpectrum(c.inp_signal_buff)
 
-plt.show()
+
 

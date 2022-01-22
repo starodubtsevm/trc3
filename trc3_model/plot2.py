@@ -1,10 +1,12 @@
 import matplotlib.pyplot as plt
 from scipy import fft, arange
 import numpy as np
+from pylab import figure
 import const as c
 
 def to_plot (out_buffers, inp_signal_buff):
 
+	figure(1)
 	ax1 = plt.subplot(611)
 	plt.plot(c.t, inp_signal_buff)
 	ax1.set_title('Input sugnal')
@@ -53,12 +55,11 @@ def to_plot (out_buffers, inp_signal_buff):
 	for ax in ax5, ax6, ax7, ax8, ax9, ax10, ax11 ,ax12:
 		ax.legend()
 
-	plt.show()
-
 def plotSpectrum(y):
 	"""
 	Function to plot the time domain and frequency domain signal
 	"""
+	figure(2)
 	plt.ylim(0, 80)
 	plt.xlim(0, 2000)
 	plt.grid(True)
@@ -66,6 +67,4 @@ def plotSpectrum(y):
 	plt.magnitude_spectrum(y, Fs=c.fs, scale='dB')
 	plt.ylabel('Уровень (dB)')
 	plt.xlabel('Частота (Hz)')
-
-	plt.show()
-
+	
