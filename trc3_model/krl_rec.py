@@ -5,7 +5,6 @@ from fir_filter import*
 from limiter import*
 from ask_det import*
 from comparator import*
-from ask_gen2 import*
 import const as c
 
 """

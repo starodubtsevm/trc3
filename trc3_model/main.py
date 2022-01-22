@@ -1,23 +1,34 @@
 from krl_rec import*
-from ars_gen import*
 from white_noise_gen import*
 from plot2 import*
 import matplotlib.pyplot as plt
 import const as c
+import time
+from sig_gen import*
+
+start_time = time.time()
 
 #-Start Model config----------------------------
 out_buffers = [[],[],[],[],[],[],[],[],[],[],[]]
 
 #-Track line circuit---------------------------
 krl_rec  = krl_receiver(565, 12) 				# rec krl signal
-krl_gen  = ask_gen(565, 3500, 12)					# gen krl signal
+print("--- %s seconds -krl_rec--" % (time.time() - start_time))
 
+krl_gen  = gen(565, 3500, 12)				# gen krl signal
+print("--- %s seconds -krl_gen--" % (time.time() - start_time))
 #-Interferences-------------------------------
-krl_gen  = ask_gen(480, 3500, 1)					# gen krl signal2
-ars_gen1 = ars_gen(75, 3500)					# gen ars signal1
-ars_gen2 = ars_gen(125, 3500)					# gen ars signal2
-noise_gen = white_noise(3500)						# gen noise signal
+krl_gen  = gen(480, 3500, 1)					# gen krl signal2
+print("--- %s seconds -krl_gen2--" % (time.time() - start_time))
 
+ars_gen1 = gen(75, 3500)					# gen ars signal1
+print("--- %s seconds -ars_gen--" % (time.time() - start_time))
+
+ars_gen2 = gen(125, 3500)					# gen ars signal2
+print("--- %s seconds -ars_gen2--" % (time.time() - start_time))
+
+noise_gen = white_noise(0)						# gen noise signal
+print("--- %s seconds -noise_gen--" % (time.time() - start_time))
 #-End Model config----------------------------
 
 #-Start Main loop------------------------------

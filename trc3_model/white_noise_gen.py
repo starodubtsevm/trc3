@@ -15,9 +15,6 @@ class white_noise(object):
 		for i in range(len(c.t)):
 			self._data.append(self.ampl*np.random.randn())
 
-		for x, y in zip(self._data,c.inp_signal_buff):
-			self.res+=[x+y]
-
-		c.inp_signal_buff = self.res
+		c.inp_signal_buff = [a + b for a, b in zip(c.inp_signal_buff, self._data)]
 
 
