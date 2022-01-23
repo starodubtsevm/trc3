@@ -27,7 +27,7 @@ def plot_fr(y,freqs,band,ntaps,fs,text):
     plt.legend()
     plt.xlabel('Frequency (Hz)')
     plt.ylabel('Gain')
-    plt.title('АЧХ входного FIR фильтра, %d - %d  Гц %d taps, fs = %d Hz' % (lowcut, highcut, ntaps, fs))
+    plt.title('АЧХ FIR фильтра, %d - %d  Гц %d taps, fs = %d Hz' % (lowcut, highcut, ntaps, fs))
 
     file_name = str("FIR_" + str(lowcut)+ "-" + str(highcut) + str(text) + ".png")
 
@@ -53,9 +53,8 @@ def plot_fr2(y,fcut,ntaps,fs,text):
     plt.legend()
     plt.xlabel('Частота (Гц)')
     plt.ylabel('Коефф передачи')
-    plt.title('АЧХ FIR ФНЧ, %d  Гц %d taps, fs = %d Hz' % (fcut, ntaps, fs))
+    plt.title('АЧХ FIR , %d  Гц %d taps, fs = %d Hz' % (fcut, ntaps, fs))
 
     file_name = str("FIR_" + str(fcut) + str(text)+ ".png")
-    print (file_name)
     plt.savefig('./Graphics/'+ file_name)
     plt.clf()

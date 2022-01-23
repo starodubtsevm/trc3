@@ -6,6 +6,7 @@ import const as c
 import time
 from sig_gen import*
 
+
 start_time = time.time()
 print ("preparing signals")
 #-Start Model config----------------------------
@@ -30,7 +31,8 @@ print ("")
 #-End Model config----------------------------
 print ("--- %s seconds -end preparing--" % (time.time() - start_time))
 
-
+print ("fs = " + str(fs)+" Hz")
+print ("fs2 = " + str(fs2)+" Hz")
 #-Start Main loop------------------------------
 count_decimation = 0
 ii = 0
@@ -42,7 +44,7 @@ for i in range(sim_point):
 	out_buffers[1].append(krl_rec.det.proc(out_buffers[0][i]))# signal after ask det
 	out_buffers[2].append(krl_rec.lim.proc(out_buffers[1][i]))# signal after ask lim
 
-	if count_decimation == 80:					# decimation by 80 @ 8000 Hz
+	if count_decimation == c.dec_coef:					# decimation
 #- 8 Hz channel
 		out_buffers[3].append(krl_rec.hz8_fir.proc(out_buffers[2][i]))# signal after 8Hz filter
 		out_buffers[4].append(krl_rec.det8.proc(out_buffers[3][ii]))# signal after ask det 8Hz
@@ -64,6 +66,8 @@ for i in range(sim_point):
 #	print(len(out_buffers[i]))
 
 to_plot (out_buffers, c.inp_signal_buff)
+
+#plotSpectrum(out_buffers[8])
 
 plotSpectrum(c.inp_signal_buff)
 

@@ -21,10 +21,10 @@ class krl_receiver(object):
 		self.hz12_fir = fir(f_12)# 12Hz filter_buf
 		self.det8 = ask_det() # ask detector 8Hz
 		self.det12 = ask_det() # ask detector 12Hz
-		self.hz10fir8 = fir(f_15) # ask 8 Hz
-		self.hz10fir12 = fir(f_15)#  ask 12 Hz
-		self.comp8 = comparator(100,180,2) #comparator 8Hz
-		self.comp12 = comparator(100,150,2) #comparator 12Hz
+		self.hz10fir8 = fir(f_10) # ask 8 Hz
+		self.hz10fir12 = fir(f_10)#  ask 12 Hz
+		self.comp8 = comparator(80,100,2) #comparator 8Hz
+		self.comp12 = comparator(80,100,2) #comparator 12Hz
 
 		freqs = {
 			420:f_420,

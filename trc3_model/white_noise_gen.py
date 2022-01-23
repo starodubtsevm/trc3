@@ -14,5 +14,6 @@ class white_noise(object):
 		for i in range (len(c.t))]
 
 		c.inp_signal_buff = [a + b for a, b in zip(c.inp_signal_buff, _data)]
+		del _data
 
 

@@ -9,20 +9,20 @@ def to_plot (out_buffers, inp_signal_buff):
 	figure(1)
 	ax1 = plt.subplot(611)
 	plt.plot(c.t, inp_signal_buff)
-	ax1.set_title('Input sugnal')
+	ax1.set_title('Input signal  ' + str("fs = ") + str(c.fs) + " Hz")
 	plt.xticks([])
 
 	ax2 = plt.subplot(612, sharex=ax1)
 	plt.plot(c.t, out_buffers[0])
-	ax2.set_title('After channel filter output')
+	ax2.set_title('After channel filter output  ' + str("fs = ") + str(c.fs) + " Hz")
 
 	ax4 = plt.subplot(613, sharex=ax1)
 	plt.plot(c.t, out_buffers[2])
-	ax4.set_title('After ask det output')
+	ax4.set_title('After ask det output  '+ str("fs = ") + str(c.fs) + " Hz")
 
 	ax5 = plt.subplot(614)
 	plt.plot(c.t2, out_buffers[3], label = '8Hz')
-	ax5.set_title('filters outputs')
+	ax5.set_title('filters outputs 8 & 12 Hz ' + str("fs = ") + str(c.fs2) + " Hz")
 	plt.xticks([])
 
 	ax6 = plt.subplot(614)

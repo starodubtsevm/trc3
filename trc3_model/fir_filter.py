@@ -4,7 +4,7 @@ import time
 import const as c
 from FIR_8 import *
 from FIR_12 import *
-from FIR_15 import *
+from FIR_10 import *
 from FIR_420 import *
 from FIR_480 import *
 from FIR_565 import *
@@ -24,7 +24,7 @@ class fir(object):
 	def proc(self,sample):
 		"""sample processed """
 		if len(self._data) == self.size:
-			self._data[self.index]= sample
+			self._data[self.index] = sample
 		else:
 			self._data.append(sample)
 		self.index = (self.index + 1) % self.size

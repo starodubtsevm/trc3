@@ -4,44 +4,54 @@ from plot import*
 from print_to_file import*
 from print_to_file2 import*
 import time
+import os
 
 #-входной (канальный фильтр)
 freqs_KRL = 420, 480, 565, 720, 780		# частоты фильтра КРЛ
 band_KRL  = 24					# полоса пропускания фильтра
-ntaps_KRL = 1000				# порядок фильтра
-fs_KRL = 8000
+ntaps_KRL = 500				# порядок фильтра
+fs_KRL = 4000
 
 #-фильтр АРС (канал измерения)
 freqs_ARS = 75, 125, 175, 225, 275, 325		# частоты фильтра АРС
 band_ARS  = 15					# полоса пропускания фильтра
 ntaps_ARS = 150					# порядок фильтра
-fs_ARS = 2000
+fs_ARS = 4000
 
 #-фильтр КРЛ (канал измерения)
 freqs_KRLi = 420, 480, 565, 720, 780		# частоты фильтра АРС
 band_KRLi  = 24					# полоса пропускания фильтра
-ntaps_KRLi = 400				# порядок фильтра
+ntaps_KRLi = 200				# порядок фильтра
 fs_KRLi = 4000
 
 #-фильтры 8 и 12 Гц
 freqs_MOD = 8, 12
 band_MOD = 2
-ntaps_MOD = 80
+ntaps_MOD = 50
 fs_MOD = 100
 
 #-ФНЧ
-LPF_cut = 15				# частота среза фнч после детектора
+LPF_cut = 10				# частота среза фнч после детектора
 ntaps_LPF = 100				# порядок фильтра
 fs_LPF = 100
 
 # ФНЧ на вых генератора
 LPFg_cut = 850				# частота среза фнч после генераторов
 ntaps_LPFg = 100			# порядок фильтра
-fs_LPFg = 8000
+fs_LPFg = 4000
 
 #--------------------------------------------------------------------------
 res = []
 start_time = time.clock()
+
+#-Очистка каталогов для генерации результатов
+cat = ['./Graphics/', "../trc3_model/FIR_models/","./Headers"]
+
+for i in range (len(cat)):
+	os.system("rm -rf " + cat[i])
+	os.mkdir(cat[i])
+
+#--------------------------------------------------------------------------
 
 #-расчет и формирование *.h файлов входных фильтров-КРЛ---------------------
 for i in range (len(freqs_KRL)):
@@ -66,7 +76,6 @@ for i in range (len(freqs_KRLi)):
 	prn_model_files(y,freqs_KRLi[i], len(taps_KRLi),fs_KRLi,'I')	# формирование *.py файлов
 	plot_fr(y, freqs_KRLi[i], band_KRLi, ntaps_KRLi,fs_KRLi,'I')	# формирование графиков АЧХ
 
-print(time.clock() - start_time, "seconds")
 
 #-расчет и формирование *.h файлов измерительных фильтров-АРС---------------------
 for i in range (len(freqs_ARS)):
@@ -108,4 +117,5 @@ prn_headers(y,LPFg_cut, len(taps_LPFg),fs_LPFg,'L')		# формирование 
 prn_model_files(y,LPFg_cut, len(taps_LPFg),fs_LPFg,'')	# формирование *.py файлов
 plot_fr2(y, LPFg_cut, ntaps_LPFg,fs_LPFg,'L')		# формирование графиков АЧХ
 
+print(time.clock() - start_time, "seconds")
 
