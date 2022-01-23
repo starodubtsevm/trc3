@@ -47,9 +47,8 @@ start_time = time.clock()
 #-Очистка каталогов для генерации результатов
 cat = ['./Graphics/', "../trc3_model/FIR_models/","./Headers"]
 
-for i in range (len(cat)):
-	os.system("rm -rf " + cat[i])
-	os.mkdir(cat[i])
+[os.system("rm -rf " + cat[i]) for i in range(len(cat))]
+[os.mkdir(cat[i]) for i in range(len(cat))]
 
 #--------------------------------------------------------------------------
 
@@ -57,32 +56,27 @@ for i in range (len(cat)):
 for i in range (len(freqs_KRL)):
 	taps_KRL = bpf_fir(ntaps_KRL, freqs_KRL[i] - band_KRL/2,
 	freqs_KRL[i] + band_KRL/2,fs_KRL)
-	y = [int(taps_KRL[i] * 32768) for i in range(len(taps_KRL))]
-	res.append(y)
+	y=[int(taps_KRL[i] * 32768) for i in range(len(taps_KRL))]
 
 	prn_headers(y,freqs_KRL[i], len(taps_KRL),fs_KRL,'')	# формирование *.h файлов
 	prn_model_files(y,freqs_KRL[i], len(taps_KRL),fs_KRL,'')	# формирование *.py файлов
 	plot_fr(y, freqs_KRL[i], band_KRL, ntaps_KRL,fs_KRL,'')	# формирование графиков АЧХ
-
 
 #-расчет и формирование *.h файлов измерительных фильтров-КРЛ---------------------
 for i in range (len(freqs_KRLi)):
 	taps_KRLi = bpf_fir(ntaps_KRLi, freqs_KRLi[i] - band_KRLi/2,
 	freqs_KRLi[i] + band_KRLi/2,fs_KRLi)
 	y = [int(taps_KRLi[i] * 32768) for i in range(len(taps_KRLi))]
-	res.append(y)
 
 	prn_headers(y,freqs_KRLi[i], len(taps_KRLi),fs_KRLi,'I')	# формирование *.h файлов
 	prn_model_files(y,freqs_KRLi[i], len(taps_KRLi),fs_KRLi,'I')	# формирование *.py файлов
 	plot_fr(y, freqs_KRLi[i], band_KRLi, ntaps_KRLi,fs_KRLi,'I')	# формирование графиков АЧХ
-
 
 #-расчет и формирование *.h файлов измерительных фильтров-АРС---------------------
 for i in range (len(freqs_ARS)):
 	taps_ARS = bpf_fir(ntaps_ARS, freqs_ARS[i] - band_ARS/2,
 	freqs_ARS[i] + band_ARS/2,fs_ARS)
 	y = [int(taps_ARS[i] * 32768) for i in range(len(taps_ARS))]
-	res.append(y)
 
 	prn_headers(y,freqs_ARS[i], len(taps_ARS),fs_ARS,'')	# формирование *.h файлов
 	prn_model_files(y,freqs_ARS[i], len(taps_ARS),fs_ARS,'')	# формирование *.py файлов
@@ -93,7 +87,6 @@ for i in range (len(freqs_MOD)):
 	taps_MOD = bpf_fir(ntaps_MOD, freqs_MOD[i] - band_MOD/2,
 	freqs_MOD[i] + band_MOD/2,fs_MOD)
 	y = [int(taps_MOD[i] * 32768) for i in range(len(taps_MOD))]
-	res.append(y)
 
 	prn_headers(y,freqs_MOD[i], len(taps_MOD),fs_MOD,'')	# формирование *.h файлов
 	prn_model_files(y,freqs_MOD[i], len(taps_MOD),fs_MOD,'')	# формирование *.py файлов
@@ -102,7 +95,6 @@ for i in range (len(freqs_MOD)):
 #-расчет и формирование *.h файлов фильтра низких частот (ФНЧ)------------
 taps_LPF = lpf_fir(ntaps_LPF, LPF_cut,fs_LPF)
 y = [int(taps_LPF[i] * 32768) for i in range(len(taps_LPF))]
-res.append(y)
 
 prn_headers(y,LPF_cut, len(taps_LPF),fs_LPF,'L')		# формирование *.h файлов
 prn_model_files(y,LPF_cut, len(taps_LPF),fs_LPF,'')	# формирование *.py файлов
@@ -111,7 +103,6 @@ plot_fr2(y, LPF_cut, ntaps_LPF,fs_LPF,'L')		# формирование граф�
 #-расчет и формирование *.h файлов ФНЧ на выходе генераторов------------
 taps_LPFg = lpf_fir(ntaps_LPFg, LPFg_cut,fs_LPFg)
 y = [int(taps_LPFg[i] * 32768) for i in range(len(taps_LPFg))]
-res.append(y)
 
 prn_headers(y,LPFg_cut, len(taps_LPFg),fs_LPFg,'L')		# формирование *.h файлов
 prn_model_files(y,LPFg_cut, len(taps_LPFg),fs_LPFg,'')	# формирование *.py файлов

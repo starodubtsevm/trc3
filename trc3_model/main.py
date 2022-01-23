@@ -6,7 +6,6 @@ import const as c
 import time
 from sig_gen import*
 
-
 start_time = time.time()
 print ("preparing signals")
 #-Start Model config----------------------------
