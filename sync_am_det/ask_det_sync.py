@@ -1,43 +1,30 @@
-import const as c
-import numpy as np
+import time
+"""
+sync AM detector
 
-#---------------------------------------
-class ask_det_sync(object):
+"""
+class gen(object):
+    def __init__(self, fc, A = 0, fm = 0):
+        """initialization"""
+        if A == 0: return
+        from numpy import pi, cos, sin
+        import const as c
+        from const import t
+        self.fc = fc
+        self.fm = fm
+        self.A = A
+        omega_fc   = 2*pi*fc
 
-	def __init__(self, F):
-		"""initialization"""
-		self.T = (1.0/F)*1000000				# приведенный период сигнала
-		self.fs = c.fs
-		self.A = 1
-		self.cycle_count_sin = 0
-		self.cycle_count_cos = int(-self.T/4)
-		self.sin = 0
-		self.cos = 0
-		self.y_sin = 1
-		self.y_cos = 1
+    def proc(self,sample):
+    """demodulator"""
 
-	def local_gen(self):
-		'''Локальный генератор cos и sin'''
-		
-		print (self.cycle_count_sin, self.y_sin)
+       '''Локальный генератор cos и sin'''
+        sin_sig =  [(self.A*cos(omega_fc*t[i]) for i in range (len(t))]
+        cos_sig =  [(self.A*cos(omega_fc*t[i]) for i in range (len(t))]
 
-		if self.cycle_count_sin > int(self.T/2):
-			self.y_sin ^= 1
-			self.cycle_count_sin = 0
+        y_0  = sample * sin_sig
+        y_90 = sample * cos_sig
 
-		if self.cycle_count_cos  < int((self.T)/(self.T/4)):
-			self.y_cos ^= 1
-			self.cycle_count_cos = int(-self.T/4)
 
-		self.cycle_count_sin = self.cycle_count_sin + 1
-		self.cycle_count_cos = self.cycle_count_cos + 1
-
-		return self.y_sin, self.y_cos
-
-	def proc(self,sample):
-		"""demodulation"""
-
-		self.sin, self.cos = self.local_gen()
-
-		return self.sin, self.cos
+        return res
 

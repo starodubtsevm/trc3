@@ -23,7 +23,7 @@ class gen(object):
 		else:
 			self.M = 1
 			omega_fm = 2*pi*fm
-
+		
 		_data = [(self.A*cos(omega_fc*t[i])*(1 + self.M * cos(omega_fm *t[i]))+\
 		self.A2*cos(_2omega_fc*t[i])*(1 + self.M * cos(omega_fm *t[i]))+\
 		self.A3*cos(_3omega_fc*t[i])*(1 + self.M * cos(omega_fm *t[i])))\

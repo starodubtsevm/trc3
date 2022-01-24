@@ -10,8 +10,11 @@ from FIR_480 import *
 from FIR_565 import *
 from FIR_720 import *
 from FIR_780 import *
+from calc2 import*
 
 from scipy.signal import lfilter
+
+import random
 
 class fir(object):
 	def __init__(self, h):
