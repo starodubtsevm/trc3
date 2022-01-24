@@ -4,7 +4,6 @@ sys.path.insert(0, '..')
 from fir_filter import*
 from limiter import*
 from ask_det import*
-from am_sync_det import*
 from comparator import*
 import const as c
 
@@ -35,6 +34,4 @@ class krl_receiver(object):
 			780:f_780
 			}
 		self.chan_fir = fir(freqs[self.fc]) #.channel filter
-
-		self.det2 = s_am_det(fc) # freq sync AM det channel
 

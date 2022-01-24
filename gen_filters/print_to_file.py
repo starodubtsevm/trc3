@@ -72,6 +72,8 @@ def prn_model_files(y, freqs, len_tabs,fs,text):
     head = (str4, str5, str9)
 
     directory_path = "../trc3_model/FIR_models/"
+    directory_path2 = "../trc3_model/FIR_models_s/"
+    
     file_path = os.path.join(directory_path, "FIR_" + str(freqs)+ str(text) +".py")
 
     out_file = open(file_path,"wt")

@@ -32,20 +32,20 @@ fs_MOD = 100
 
 #-ФНЧ
 LPF_cut = 10				# частота среза фнч после детектора
-ntaps_LPF = 100				# порядок фильтра
+ntaps_LPF = 40				# порядок фильтра
 fs_LPF = 100
 
-# ФНЧ на вых генератора
-LPFg_cut = 850				# частота среза фнч после генераторов
+# ФНЧ для детектора 2
+LPFg_cut = 5				# частота среза фнч после генераторов
 ntaps_LPFg = 100			# порядок фильтра
-fs_LPFg = 4000
+fs_LPFg = 100
 
 #--------------------------------------------------------------------------
 res = []
-start_time = time.clock()
+start_time = time.time()
 
 #-Очистка каталогов для генерации результатов
-cat = ['./Graphics/', "../trc3_model/FIR_models/","./Headers"]
+cat = ['./Graphics/', "../trc3_model/FIR_models/","./Headers","../trc3_model_s/FIR_models/"]
 
 [os.system("rm -rf " + cat[i]) for i in range(len(cat))]
 [os.mkdir(cat[i]) for i in range(len(cat))]
@@ -108,5 +108,6 @@ prn_headers(y,LPFg_cut, len(taps_LPFg),fs_LPFg,'L')		# формирование 
 prn_model_files(y,LPFg_cut, len(taps_LPFg),fs_LPFg,'')	# формирование *.py файлов
 plot_fr2(y, LPFg_cut, ntaps_LPFg,fs_LPFg,'L')		# формирование графиков АЧХ
 
-print(time.clock() - start_time, "seconds")
+
+print(time.time() - start_time, "seconds")
 

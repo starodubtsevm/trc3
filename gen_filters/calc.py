@@ -16,4 +16,9 @@ def lpf_fir(ntaps, fcut, fs, window = 'hamming'):
     taps = firwin(ntaps, fcut, nyq=nyq)
     return taps
 
+def hpf_fir(ntaps, fcut, fs, window = 'hamming'):
+    nyq = 0.5 * fs
+    fn = fs/2
 
+    taps = firwin(ntaps, fcut, nyq=nyq, pass_zero =False)
+    return taps

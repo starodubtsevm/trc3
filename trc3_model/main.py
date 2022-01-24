@@ -7,7 +7,6 @@ from plot2 import*
 import const as c
 
 from sig_gen import*
-from am_sync_det import*
 
 start_time = time.time()
 print ("preparing signals")
@@ -17,8 +16,8 @@ out_buffers = []
 [out_buffers.append([]) for i in range (11)]
 
 #-Track line circuit---------------------------
-krl_rec  = krl_receiver(565, 8) 				# rec krl signal
-krl_gen  = gen(565, 3500, 8)				# gen krl signal
+krl_rec  = krl_receiver(565, 12) 				# rec krl signal
+krl_gen  = gen(565, 3500, 12)				# gen krl signal
 
 #-Interferences-------------------------------
 krl_gen  = gen(480, 3500, 12)					# generator krl signal2
@@ -43,7 +42,7 @@ for i in range(sim_point):
 #-----main-cycle--------------------------------
 	COUNT_DECIM += 1
 	out_buffers[0].append(krl_rec.chan_fir.proc(c.inp_signal_buff[i]))# filtered signal
-	out_buffers[1].append(krl_rec.det2.proc(out_buffers[0][i]))# signal after ask det
+	out_buffers[1].append(krl_rec.det.proc(out_buffers[0][i]))# signal after ask det
 	out_buffers[2].append(krl_rec.lim.proc(out_buffers[1][i]))# signal after ask lim
 
 	if COUNT_DECIM == c.dec_coef:					# decimation
