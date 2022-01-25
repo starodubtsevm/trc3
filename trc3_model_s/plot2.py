@@ -14,20 +14,20 @@ def to_plot (out_buffers, inp_signal_buff):
 
 	ax2 = plt.subplot(612, sharex=ax1)
 	plt.plot(c.t, out_buffers[0])
-	ax2.set_title('After channel filter output  ' + str("fs = ") + str(c.fs) + " Hz")
+	ax2.set_title('After filter ' + str("fs = ") + str(c.fs) + " Hz")
 
 	ax3 = plt.subplot(613, sharex=ax1)
-	plt.plot(c.t, out_buffers[1])
-	ax3.set_title('AM detector  '+ str("fs = ") + str(c.fs) + " Hz")
-	
-	ax4 = plt.subplot(614, sharex=ax1)
-	plt.plot(c.t, out_buffers[2])
-	ax4.set_title('After DC blocker  '+ str("fs = ") + str(c.fs) + " Hz")
+	plt.plot(c.t2, out_buffers[1])
+	ax3.set_title('krl_rec.det2.mux   '+ str("fs = ") + str(c.fs) + " Hz")
 
-	ax5 = plt.subplot(615)
-	plt.plot(c.t2, out_buffers[3], label = '8Hz')
-	ax5.set_title('After second AM detector  ' + str("fs = ") + str(c.fs2) + " Hz")
-	plt.xticks([])
+#	ax4 = plt.subplot(614, sharex=ax1)
+#	plt.plot(c.t2, out_buffers[2])
+#	ax4.set_title('y_dem   '+ str("fs = ") + str(c.fs2) + " Hz")
+
+#	ax5 = plt.subplot(615)
+#	plt.plot(c.t2, out_buffers[3], label = '8Hz')
+#	ax5.set_title('After second AM detector  ' + str("fs = ") + str(c.fs2) + " Hz")
+#	plt.xticks([])
 
 #	ax6 = plt.subplot(614)
 #	plt.plot(c.t2, out_buffers[4], label = '12Hz')
@@ -64,8 +64,8 @@ def plotSpectrum(y):
 	Function to plot the time domain and frequency domain signal
 	"""
 	figure(2)
-	plt.ylim(0, 80)
-	plt.xlim(0, 2000)
+	plt.ylim(0, 180)
+	plt.xlim(0, 1000)
 	plt.grid(True)
 	#plt.legend()
 	plt.magnitude_spectrum(y, Fs=c.fs, scale='dB')

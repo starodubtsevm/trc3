@@ -18,16 +18,16 @@ out_buffers = []
 [out_buffers.append([]) for i in range (11)]
 
 #-Track line circuit---------------------------
-krl_rec  = krl_receiver(565, 8) 				# rec krl signal
-krl_gen  = gen(565, 3500,8)				# gen krl signal
+krl_rec  = krl_receiver(565, 12) 				# rec krl signal
+krl_gen  = gen(565, 3500, 12)				# gen krl signal
 
 #-Interferences-------------------------------
-krl_gen  = gen(480, 1000, 12)					# generator krl signal2
-krl_gen  = gen(420,0,8)					# gen krl signal3
-krl_gen  = gen(720,0, 12)					# gen krl signal4
+krl_gen  = gen(480, 3500, 12)					# generator krl signal2
+krl_gen  = gen(420, 3500, 8)					# gen krl signal3
+krl_gen  = gen(720, 3500, 12)					# gen krl signal4
 
-ars_gen1 = gen(75, 0)					# gen ars signal1
-ars_gen2 = gen(125, 0)					# gen ars signal2
+ars_gen1 = gen(75, 3500)					# gen ars signal1
+ars_gen2 = gen(125, 3500)					# gen ars signal2
 noise_gen = white_noise(0)						# gen noise signal
 
 print ("")
@@ -38,22 +38,16 @@ print ("fs = " + str(fs)+" Hz")
 print ("fs2 = " + str(fs2)+" Hz")
 #-Start Main loop------------------------------
 COUNT_DECIM = 0
-II = 0
 for i in range(sim_point):
 
 #-----main-cycle--------------------------------
 	COUNT_DECIM += 1
 	out_buffers[0].append(krl_rec.chan_fir.proc(c.inp_signal_buff[i]))# filtered signal
-	out_buffers[1].append(krl_rec.det2.proc(c.inp_signal_buff[i]))# signal after ask det  out_buffers[0][i]
-	out_buffers[2].append(krl_rec.dc_b.proc(out_buffers[1][i]))# signal after dc blocker
+	y_0, y_90 = krl_rec.det2.mux(c.inp_signal_buff[i])# downsampling signal after
 
-	if COUNT_DECIM == c.dec_coef:					# decimation
-#- channel
-		out_buffers[3].append(krl_rec.det3.proc(out_buffers[2][i]))# signal after second detector
-		out_buffers[4].append(krl_rec.fir_5.proc(out_buffers[3][II]))# signal after dc blocker
-		#out_buffers[5].append(krl_rec.comp8.proc(out_buffers[4][II]))# signal comp
-		#out_buffers5[6].append(krl_rec.comp8.proc(out_buffers[5][II]))# signal after comp 8 Hz
-		II+=1
+	if COUNT_DECIM == c.dec_coef:# fs = 100
+		y_dem = krl_rec.det2.demod(y_0, y_90)# signal after downsampler
+		out_buffers[1].append(y_dem)# signal after demodulator
 		COUNT_DECIM = 0
 
 #-End Main loop---------------------------------
@@ -65,7 +59,7 @@ for i in range(sim_point):
 
 to_plot (out_buffers, c.inp_signal_buff)
 
-#plotSpectrum(out_buffers[8])
+plotSpectrum(out_buffers[1])
 
 #plotSpectrum(c.inp_signal_buff)
 

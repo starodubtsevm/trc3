@@ -31,14 +31,9 @@ ntaps_MOD = 50
 fs_MOD = 100
 
 #-ФНЧ
-LPF_cut = 10				# частота среза фнч после детектора
-ntaps_LPF = 40				# порядок фильтра
-fs_LPF = 100
-
-# ФНЧ для детектора 2
-LPFg_cut = 5				# частота среза фнч после генераторов
-ntaps_LPFg = 100			# порядок фильтра
-fs_LPFg = 100
+LPF_cut = 15				# частота среза фнч после детектора
+ntaps_LPF = 300				# порядок фильтра
+fs_LPF = 4000
 
 #--------------------------------------------------------------------------
 res = []
@@ -99,15 +94,6 @@ y = [int(taps_LPF[i] * 32768) for i in range(len(taps_LPF))]
 prn_headers(y,LPF_cut, len(taps_LPF),fs_LPF,'L')		# формирование *.h файлов
 prn_model_files(y,LPF_cut, len(taps_LPF),fs_LPF,'')	# формирование *.py файлов
 plot_fr2(y, LPF_cut, ntaps_LPF,fs_LPF,'L')		# формирование графиков АЧХ
-
-#-расчет и формирование *.h файлов ФНЧ на выходе генераторов------------
-taps_LPFg = lpf_fir(ntaps_LPFg, LPFg_cut,fs_LPFg)
-y = [int(taps_LPFg[i] * 32768) for i in range(len(taps_LPFg))]
-
-prn_headers(y,LPFg_cut, len(taps_LPFg),fs_LPFg,'L')		# формирование *.h файлов
-prn_model_files(y,LPFg_cut, len(taps_LPFg),fs_LPFg,'')	# формирование *.py файлов
-plot_fr2(y, LPFg_cut, ntaps_LPFg,fs_LPFg,'L')		# формирование графиков АЧХ
-
 
 print(time.time() - start_time, "seconds")
 

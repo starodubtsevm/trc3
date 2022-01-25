@@ -47,7 +47,7 @@ def plot_fr2(y,fcut,ntaps,fs,text):
     w, h = freqz(y, 1, worN=10000)
     plt.plot((fs * 0.5 / np.pi) * w, 20 * np.log10(abs(h))-90, label="Hamming window")
 
-    plt.xlim(0, fcut + 2 )
+    plt.xlim(0, fcut + 100 )
     plt.ylim(-90, 5)
     plt.grid(True)
     plt.legend()

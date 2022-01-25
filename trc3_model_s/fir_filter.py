@@ -2,10 +2,9 @@ import sys
 sys.path.append('./FIR_models')
 import time
 import const as c
-from FIR_5 import *
+from FIR_15 import *
 from FIR_8 import *
 from FIR_12 import *
-from FIR_10 import *
 from FIR_420 import *
 from FIR_480 import *
 from FIR_565 import *
