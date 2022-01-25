@@ -2,18 +2,16 @@ import sys
 sys.path.append('./FIR_models')
 import time
 import const as c
-from FIR_15 import *
+from FIR_10 import *
 from FIR_8 import *
 from FIR_12 import *
+from FIR_15 import *
 from FIR_420 import *
 from FIR_480 import *
 from FIR_565 import *
 from FIR_720 import *
 from FIR_780 import *
-
-from scipy.signal import lfilter
-
-import random
+from FIR_600 import *
 
 class fir(object):
 	def __init__(self, h):
@@ -40,10 +38,4 @@ class fir(object):
 			else:
 				indx += 1
 		return (int(acc)/32768) # result to 16 bit value
-
-	def proc2(self,y):
-		"""buffer processed """
-		filtered_y = lfilter(self.h, 1.0, c.inp_signal_buff)
-
-		return filtered_y
 

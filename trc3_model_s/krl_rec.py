@@ -2,6 +2,7 @@ import sys
 sys.path.insert(0, '..')
 
 from fir_filter import*
+from iir_filter import*
 from limiter import*
 from ask_det import*
 from am_sync_det import*
@@ -18,22 +19,14 @@ class krl_receiver(object):
 		self.fc = fc
 		self.fm = fm
 		self.lim = limiter(-1500000, 1500000) #limiter
-		self.hz8_fir = fir(f_8)# 8Hz filter_buf
-		self.hz12_fir = fir(f_12)# 12Hz filter_buf
-		self.comp8 = comparator(8,10,2) #comparator 8Hz
-
-		freqs = {
-			420:f_420,
-			480:f_480,
-			565:f_565,
-			720:f_720,
-			780:f_780
-			}
-		self.chan_fir = fir(freqs[self.fc])#.channel filter
-
+		self.hz8_fir = fir(f_8)# 8Hz
+		self.hz12_fir = fir(f_12)# 12Hz 
+		self.hz10_fir8 = fir(f_10)# 10 Hz
+		self.hz10_fir12 = fir(f_10)# 10 Hz
+		self.comp8 = comparator(50,55,2) #comparator 8Hz
+		self.comp12 = comparator(50,55,2) #comparator 8Hz
+		self.in_filter = fir(f_600)# 400-800 Hz
+		self.ask_det8 = ask_det()
+		self.ask_det12 = ask_det()
 		self.det2 = s_am_det(fc, c.fs)# input sync AM det
-
-		#self.dc_b = dc_block()# dc blocker
-
-		self.fir_10 = fir(f_15)# 15Hz filter_buf
-
+		self.fir_15 = fir(f_15)# 15Hz 

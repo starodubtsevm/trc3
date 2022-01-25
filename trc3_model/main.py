@@ -30,7 +30,7 @@ noise_gen = white_noise(0)						# gen noise signal
 
 print ("")
 #-End Model config----------------------------
-print ("--- %s seconds -end preparing--" % (time.time() - start_time))
+
 
 print ("fs = " + str(fs)+" Hz")
 print ("fs2 = " + str(fs2)+" Hz")
@@ -65,7 +65,7 @@ for i in range(sim_point):
 
 #for i in range (10):
 #	print(len(out_buffers[i]))
-
+print ("--- %s seconds -end preparing--" % (time.time() - start_time))
 to_plot (out_buffers, c.inp_signal_buff)
 
 #plotSpectrum(out_buffers[8])

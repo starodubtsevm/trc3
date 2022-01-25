@@ -6,6 +6,12 @@ from print_to_file2 import*
 import time
 import os
 
+#-общий входной фильтр (КРЛ)
+freqs_KRLg = 600		# частоты фильтра КРЛ
+band_KRLg  = 440					# полоса пропускания фильтра
+ntaps_KRLg = 200				# порядок фильтра
+fs_KRLg = 4000
+
 #-входной (канальный фильтр)
 freqs_KRL = 420, 480, 565, 720, 780		# частоты фильтра КРЛ
 band_KRL  = 24					# полоса пропускания фильтра
@@ -25,27 +31,42 @@ ntaps_KRLi = 200				# порядок фильтра
 fs_KRLi = 4000
 
 #-фильтры 8 и 12 Гц
-freqs_MOD = 8, 12
+freqs_MOD = 8, 12,
 band_MOD = 2
-ntaps_MOD = 50
+ntaps_MOD = 60
 fs_MOD = 100
 
 #-ФНЧ
 LPF_cut = 15				# частота среза фнч после детектора
-ntaps_LPF = 300				# порядок фильтра
+ntaps_LPF = 400				# порядок фильтра
 fs_LPF = 4000
+
+#-ФНЧ
+iLPF_cut = 10				# частота среза фнч на выходе измерителя
+ntaps_iLPF = 30				# порядок фильтра
+fs_iLPF = 100
 
 #--------------------------------------------------------------------------
 res = []
 start_time = time.time()
 
 #-Очистка каталогов для генерации результатов
-cat = ['./Graphics/', "../trc3_model/FIR_models/","./Headers","../trc3_model_s/FIR_models/"]
+cat = ['./Graphics/', "../trc3_model/FIR_models/","./Headers"]#,"../trc3_model_s/FIR_models/"
 
 [os.system("rm -rf " + cat[i]) for i in range(len(cat))]
 [os.mkdir(cat[i]) for i in range(len(cat))]
 
 #--------------------------------------------------------------------------
+#-расчет и формирование *.h файлов группового входных фильтра-КРЛ---------------------
+taps_KRLg = bpf_fir(ntaps_KRLg, freqs_KRLg - band_KRLg/2,
+freqs_KRLg + band_KRLg/2,fs_KRLg)
+y=[int(taps_KRLg[i] * 32768) for i in range(len(taps_KRLg))]
+
+prn_headers(y,freqs_KRLg, len(taps_KRLg),fs_KRLg,'')	# формирование *.h файлов
+prn_model_files(y,freqs_KRLg, len(taps_KRLg),fs_KRLg,'')	# формирование *.py файлов
+plot_fr(y, freqs_KRLg, band_KRLg, ntaps_KRLg,fs_KRLg,'')	# формирование графиков АЧХ
+
+
 
 #-расчет и формирование *.h файлов входных фильтров-КРЛ---------------------
 for i in range (len(freqs_KRL)):
@@ -94,6 +115,14 @@ y = [int(taps_LPF[i] * 32768) for i in range(len(taps_LPF))]
 prn_headers(y,LPF_cut, len(taps_LPF),fs_LPF,'L')		# формирование *.h файлов
 prn_model_files(y,LPF_cut, len(taps_LPF),fs_LPF,'')	# формирование *.py файлов
 plot_fr2(y, LPF_cut, ntaps_LPF,fs_LPF,'L')		# формирование графиков АЧХ
+
+#-расчет и формирование *.h файлов фильтра низких частот (ФНЧ)------------
+taps_iLPF = lpf_fir(ntaps_iLPF, iLPF_cut,fs_iLPF)
+y = [int(taps_iLPF[i] * 32768) for i in range(len(taps_iLPF))]
+
+prn_headers(y,iLPF_cut, len(taps_iLPF),fs_iLPF,'L')		# формирование *.h файлов
+prn_model_files(y,iLPF_cut, len(taps_iLPF),fs_iLPF,'')	# формирование *.py файлов
+plot_fr2(y, iLPF_cut, ntaps_iLPF,fs_iLPF,'L')		# формирование графиков АЧХ
 
 print(time.time() - start_time, "seconds")
 
