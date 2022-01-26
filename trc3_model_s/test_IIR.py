@@ -3,7 +3,12 @@ from scipy import signal
 import matplotlib.pyplot as plt
 from IIR2Filter import IIR2Filter
 
-FilterMains = IIR2Filter(4,[50], rs=50, filterType='lowpass', design='cheby1',rp=2,fs=4000)
+FilterMains = IIR2Filter(4, [50],
+                         rs=50,
+                         filterType='lowpass',
+                         design='cheby1',
+                         rp=2,
+                         fs=4000)
 
 sos = FilterMains.COEFFS
 
@@ -19,8 +24,7 @@ ax.axis((10, 2000, -100, 10))
 ax.grid(which='both', axis='both')
 plt.show()
 
-
 #print(FilterMains.COEFFS)
-#print(type(FilterMains.COEFFS)) 
+#print(type(FilterMains.COEFFS))
 sos = FilterMains.COEFFS
-print (sos)
+print(sos)
