@@ -20,17 +20,14 @@ krl_rec = krl_receiver(565, 12)  # rec krl signal
 krl_gen = gen(565, 3500, 12)  # gen krl signal
 
 #-Interferences-------------------------------
-krl_gen = gen(480, 14000, 12)  # gen krl signal2
-krl_gen = gen(420, 14000, 8)  # gen krl signal3
-krl_gen = gen(720, 14000, 12)  # gen krl signal4
-krl_gen = gen(780, 14000, 8)  # gen krl signal5
-
-krl_gen = gen(565, 7000, 1)  # IMD signal
+krl_gen = gen(480, 15000, 12)  # gen krl signal2
+krl_gen = gen(420, 15000, 8)  # gen krl signal3
+krl_gen = gen(720, 15000, 12)  # gen krl signal4
+krl_gen = gen(780, 15000, 8)  # gen krl signal15krl_gen = gen(565, 7000, 1)  # IMD signal
 
 ars_gen1 = gen(75, 28000)  # gen ars signal1
 ars_gen2 = gen(125, 28000)  # gen ars signal2
-noise_gen = white_noise(14000)  # gen noise signal
-
+noise_gen = white_noise(15000)  # gen noise signal
 print("")
 #-End Model config----------------------------
 print("fs = " + str(fs) + " Hz")
@@ -86,7 +83,7 @@ for i in range(sim_point):
 #-----plot-results------------------------------
 
 #for i in range (10):
-#	print(len(out_buffers[i]))
+#    print(len(out_buffers[i]))
 print("--- %s seconds -end preparing--" % (time.time() - start_time))
 to_plot(out_buffers, c.inp_signal_buff)
 
