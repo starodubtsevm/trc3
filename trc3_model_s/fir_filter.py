@@ -16,7 +16,6 @@ from FIR_600 import *
 
 
 class fir(object):
-
     def __init__(self, h):
         """initialization"""
         self.index = 0

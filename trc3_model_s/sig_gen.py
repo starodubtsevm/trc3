@@ -5,7 +5,6 @@ Ask generator
 
 
 class gen(object):
-
     def __init__(self, fc, A=0, fm=0):
         """initialization"""
         if A == 0: return

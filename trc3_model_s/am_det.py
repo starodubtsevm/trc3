@@ -2,14 +2,14 @@ from numpy import pi, cos, sin, sqrt
 import const as c
 from const import t, t2
 from fir_filter import *
-from iir_filter import *
 from statistics import mean
 """
-sync AM detector
+set of AM detectors
 """
 
 
-class s_am_det(object):
+class am_det_coherent(object):
+    "coherent AM dector"
 
     def __init__(self, fc, fs):
         """initialization"""
@@ -65,3 +65,17 @@ class s_am_det(object):
         res = sqrt(res)
 
         return res
+
+
+#---------------------------------------
+class am_det_env(object):
+    "envelop AM detector"
+
+    def __init__(self):
+        """initialization"""
+
+    def proc(self, sample):
+        """demodulation"""
+        y = abs(sample)
+
+        return y

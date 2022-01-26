@@ -3,7 +3,6 @@ import const as c
 
 #---------------------------------------
 class comparator(object):
-
     def __init__(self, threshold_min, threshold_max, delay):
         """initialization"""
         self.thres_min = threshold_min

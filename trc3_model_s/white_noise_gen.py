@@ -5,7 +5,6 @@ import const as c
 
 #---------------------------------------
 class white_noise(object):
-
     def __init__(self, A=0):
         """initialization"""
         self.ampl = A

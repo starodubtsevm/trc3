@@ -3,7 +3,6 @@ from const import *
 
 #---------------------------------------
 class limiter(object):
-
     def __init__(self, out_min, out_max):
         """initialization"""
         self.out_min = out_min

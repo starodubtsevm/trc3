@@ -4,7 +4,6 @@ import numpy as np
 
 #---------------------------------------
 class mean_filt(object):
-
     def __init__(self, lenght):
         """initialization"""
         self.sum = [0 for i in range(lenght)]

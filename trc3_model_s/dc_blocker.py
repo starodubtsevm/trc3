@@ -15,7 +15,6 @@ import const as c
 
 #---------------------------------------
 class dc_block(object):
-
     def __init__(self):
         """initialization"""
         self.xm1 = 0
