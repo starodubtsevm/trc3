@@ -4,18 +4,11 @@ import time
 import const as c
 from FIR_8 import *
 from FIR_12 import *
-from FIR_10 import *
-from FIR_15 import *
 from FIR_420 import *
 from FIR_480 import *
 from FIR_565 import *
 from FIR_720 import *
 from FIR_780 import *
-from calc2 import*
-
-from scipy.signal import lfilter
-
-import random
 
 class fir(object):
 	def __init__(self, h):

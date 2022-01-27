@@ -1,45 +1,25 @@
 import sys
-import cython
 
 sys.path.append('./FIR_models')
 import time
 import const as c
-from FIR_10 import *
 from FIR_8 import *
 from FIR_12 import *
-from FIR_15 import *
-from FIR_420 import *
-from FIR_480 import *
-from FIR_565 import *
-from FIR_720 import *
-from FIR_780 import *
+from FIR_14 import *
 from FIR_600 import *
 
-@cython.cclass
 class fir(object):
-    def __init__(self, h)-> float:
+    def __init__(self, h):
         """initialization"""
-        self.index: cython.int
-        self.h: cython.int
-        self.size: cython.int
-        self._data: cython.int
-        
+
         self.index = 0
         self.h = h
         self.size = len(self.h)
         self._data = [0] * self.size
 
-    @cython.ccall
-    def proc(self, sample: cython.float)-> int:
+    def proc(self, sample):
         """sample processed """
-        acc: cython.long
-        j: cython.int
-        indx: cython.int
-        self._data: cython.int
-        self.size: cython.int
-        self.index: cython.int
-        self.h: cython.int
-        
+
         if len(self._data) == self.size:
             self._data[self.index] = sample
         else:

@@ -31,30 +31,30 @@ ntaps_KRLi = 200				# порядок фильтра
 fs_KRLi = 4000
 
 #-фильтры 8 и 12 Гц
-freqs_MOD = 8, 12,
+freqs_MOD = 8 , 12
 band_MOD = 2
-ntaps_MOD = 60
+ntaps_MOD = 80
 fs_MOD = 100
 
 #-ФНЧ
-LPF_cut = 15				# частота среза фнч после детектора
-ntaps_LPF = 400				# порядок фильтра
+LPF_cut = 14				# частота среза фнч после детектора
+ntaps_LPF = 350				# порядок фильтра
 fs_LPF = 4000
 
 #-ФНЧ
-iLPF_cut = 10				# частота среза фнч на выходе измерителя
-ntaps_iLPF = 30				# порядок фильтра
-fs_iLPF = 100
+iLPF_cut = 15				# частота среза фнч на выходе измерителя
+ntaps_iLPF = 200				# порядок фильтра
+fs_iLPF = 4000
 
 #--------------------------------------------------------------------------
 res = []
 start_time = time.time()
 
-#-Очистка каталогов для генерации результатов
-cat = ['./Graphics/', "../trc3_model/FIR_models/","./Headers"]#,"../trc3_model_s/FIR_models/"
+##-Очистка каталогов для генерации результатов
+#cat = ['./Graphics/', "../trc3_model/FIR_models/","./Headers"]#,"../trc3_model_s/FIR_models/"
 
-[os.system("rm -rf " + cat[i]) for i in range(len(cat))]
-[os.mkdir(cat[i]) for i in range(len(cat))]
+#[os.system("rm -rf " + cat[i]) for i in range(len(cat))]
+#[os.mkdir(cat[i]) for i in range(len(cat))]
 
 #--------------------------------------------------------------------------
 #-расчет и формирование *.h файлов группового входных фильтра-КРЛ---------------------

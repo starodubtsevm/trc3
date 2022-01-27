@@ -13,10 +13,10 @@ class am_det_coherent(object):
 
     def __init__(self, fc, fs):
         """initialization"""
-        self.A = 1000
+        self.A = 10000
         self.omega_fc = 2 * pi * fc
-        self.f_y_0 = fir(f_15)  # sync AM det channel 0
-        self.f_y_90 = fir(f_15)  # sync AM det channel 90
+        self.f_y_0 = fir(f_14)  # sync AM det channel 0
+        self.f_y_90 = fir(f_14)  # sync AM det channel 90
         self.i = 0
         self.buff_ds_0 = [0 for i in range(41)]
         self.buff_ds_90 = [0 for i in range(41)]
@@ -30,8 +30,8 @@ class am_det_coherent(object):
         sin_sig = (self.A * sin(self.omega_fc * t[self.i]))
         cos_sig = (self.A * cos(self.omega_fc * t[self.i]))
         '''Умножение sample на cos и sin '''
-        y_0 = (sample * sin_sig)
-        y_90 = (sample * cos_sig)
+        y_0 = sample * sin_sig
+        y_90 = sample * cos_sig
         yy_0 = self.f_y_0.proc(y_0)
         yy_90 = self.f_y_90.proc(y_90)
         '''Понижение частоты дискретизации усреднением'''
@@ -55,8 +55,8 @@ class am_det_coherent(object):
 
     def demod(self, yy_0, yy_90):
         '''Фильтрация (ФНЧ) в канале 0 и 90 градусов'''
-        #yy_0  = self.f_y_0.proc(buff_0)
-        #yy_90 = self.f_y_90.proc(buff_90)
+        #yy_0  = self.f_y_0.proc(y_0) #  yy_0  = self.f_y_0.proc(buff_0)
+        #yy_90 = self.f_y_90.proc(y_90) #  yy_90 = self.f_y_90.proc(buff_90)
         '''Возведение в квадрат в канале 0 и 90 градусов'''
         y_0_square = yy_0 * yy_0 / 32768
         y_90_square = yy_90 * yy_90 / 32768

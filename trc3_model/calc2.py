@@ -1,6 +1,4 @@
-from numba import jit
 
-@jit(nopython=True)
 
 def calc (sample,_data,size,index,h):
 
