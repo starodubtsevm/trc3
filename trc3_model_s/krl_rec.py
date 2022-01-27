@@ -34,4 +34,4 @@ class krl_receiver(object):
         self.sn_12filt = mean_filt(30)
         self.filt_8hz = mean_filt(25)
         self.filt_12hz = mean_filt(25)
-        self.filt_det = mean_filt(25) # meaning for mesuariment
+        self.filt_det = mean_filt(25)  # meaning for mesuariment

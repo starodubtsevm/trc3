@@ -17,20 +17,20 @@ out_buffers = []
 
 #-Track line circuit---------------------------
 krl_rec = krl_receiver(565, 12)  # rec krl signal
-krl_gen = gen(565, 0*1024, 12)  # gen krl signal 48 mV (ADC 3.3 V, 16 Bit)
+krl_gen = gen(565, 1 * 1024, 12)  # gen krl signal 48 mV (ADC 3.3 V, 16 Bit)
 
 #-Interference-------------------------------
-krl_gen = gen(480, 0*1024, 12)  # gen krl signal 2
-krl_gen = gen(420, 0*1024, 8)  # gen krl signal 3
-krl_gen = gen(720, 0*1024, 12)  # gen krl signal 4
-krl_gen = gen(780, 0*1024, 8)  # gen krl signal 5
+krl_gen = gen(480, 10 * 1024, 12)  # gen krl signal 2
+krl_gen = gen(420, 4 * 1024, 8)  # gen krl signal 3
+krl_gen = gen(720, 4 * 1024, 12)  # gen krl signal 4
+krl_gen = gen(780, 4 * 1024, 8)  # gen krl signal 5
 
-ars_gen1 = gen(75, 0*1024)  # gen ars signal 1
-ars_gen2 = gen(125, 0*1024)  # gen ars signal 2
+ars_gen1 = gen(75, 0 * 1024)  # gen ars signal 1
+ars_gen2 = gen(125, 0 * 1024)  # gen ars signal 2
 
-krl_gen = gen(565, 0*1024, 1)  # gen krl signal IMD
+krl_gen = gen(565, 0.3 * 1024, 1)  # gen krl signal IMD
 
-noise_gen = white_noise(2*1024)  # gen noise signal
+noise_gen = white_noise(3 * 1024)  # gen noise signal
 
 print("")
 #-End Model config----------------------------
@@ -89,8 +89,8 @@ for i in range(sim_point):
 #for i in range (10):
 #    print(len(out_buffers[i]))
 print("--- %s seconds -end preparing--" % (time.time() - start_time))
-#to_plot(out_buffers, c.inp_signal_buff)
+to_plot(out_buffers, c.inp_signal_buff)
 
-plotSpectrum(c.inp_signal_buff)
+#plotSpectrum(c.inp_signal_buff)
 
 plt.show()

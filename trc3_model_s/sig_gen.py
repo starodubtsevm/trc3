@@ -13,7 +13,7 @@ class gen(object):
         from const import t
         self.fc = fc
         self.fm = fm
-        self.A = A/2
+        self.A = A / 2
         self.A2 = A * 0.01
         self.A3 = A * 0.001
         omega_fc = 2 * pi * fc

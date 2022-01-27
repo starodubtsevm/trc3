@@ -1,13 +1,12 @@
-import  const as c
+import const as c
+
 
 #---------------------------------------
 class ask_det(object):
+    def __init__(self):
+        """initialization"""
 
-	def __init__(self):
-		"""initialization"""
-
-	def proc(self, sample):
-		"""demodulation"""
-		y = abs(sample)
-		return y
-
+    def proc(self, sample):
+        """demodulation"""
+        y = abs(sample)
+        return y

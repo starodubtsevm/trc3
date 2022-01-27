@@ -51,7 +51,7 @@ def to_plot(out_buffers, inp_signal_buff):
 
     ax11 = plt.subplot(616)
     plt.plot(c.t2, out_buffers[9], label='уровень сигнал\шум 8 Гц')
-    plt.ylim(0,40)
+    plt.ylim(0, 40)
     ax11.set_title('Индикатор сигнал/шум в канале (разницы уровней в каналах 8 и 12 Гц '+ str("fs = ")\
      + str(c.fs2) + " Hz")
 

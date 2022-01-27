@@ -1,12 +1,13 @@
 import os
-from const import*
+from const import *
 
-def prn_to_file2 (y, len_y, n_taps, delay_ms, delay_tick):
+
+def prn_to_file2(y, len_y, n_taps, delay_ms, delay_tick):
     res = []
     head_count = 0
     directory_path = "./CPPs"
     file_path = os.path.join(directory_path, "const_params" + ".cpp")
-    out_file = open(file_path,"wt")
+    out_file = open(file_path, "wt")
 
     global_head = '''//
 //  const_params.cpp
@@ -29,8 +30,10 @@ const uint8_T rtCP_pooled_7RDcWxPAsoZj[8] = { 171U, 87U, 174U, 93U, 186U, 117U,
 extern const uint8_T rtCP_pooled_7SO3KLzA3oiw;
 const uint8_T rtCP_pooled_7SO3KLzA3oiw = 181U;
 '''
-    str1 = "extern const int16_T rtCP_pooled_8yBDKlhJRBwC["+str(n_taps)+"];" + '\n'
-    str2 = "const int16_T rtCP_pooled_8yBDKlhJRBwC["+str(n_taps)+"] = {" + '\n'
+    str1 = "extern const int16_T rtCP_pooled_8yBDKlhJRBwC[" + str(
+        n_taps) + "];" + '\n'
+    str2 = "const int16_T rtCP_pooled_8yBDKlhJRBwC[" + str(
+        n_taps) + "] = {" + '\n'
 
     head_1 = head_1 + str1 + str2
 
@@ -44,8 +47,10 @@ const uint8_T rtCP_pooled_Cb5pPY6UVSBf = 74U;
 extern const uint8_T rtCP_pooled_CfX2Fv7a5Szf;
 const uint8_T rtCP_pooled_CfX2Fv7a5Szf = 121U;
 '''
-    str1 = "extern const int16_T rtCP_pooled_Edk1mcyMo0OS["+str(n_taps)+"];" + '\n'
-    str2 = "const int16_T rtCP_pooled_Edk1mcyMo0OS["+str(n_taps)+"] = {" + '\n'
+    str1 = "extern const int16_T rtCP_pooled_Edk1mcyMo0OS[" + str(
+        n_taps) + "];" + '\n'
+    str2 = "const int16_T rtCP_pooled_Edk1mcyMo0OS[" + str(
+        n_taps) + "] = {" + '\n'
 
     head_2 = head_2 + str1 + str2
 
@@ -54,8 +59,10 @@ extern const uint8_T rtCP_pooled_HZCEvVJK6aRK[8];
 const uint8_T rtCP_pooled_HZCEvVJK6aRK[8] = { 211U, 167U, 79U, 158U, 61U, 122U,
   244U, 233U } ;
 '''
-    str1 = "extern const int16_T rtCP_pooled_KNqaX0SAN7Zx["+str(n_taps)+"];" + '\n'
-    str2 = "const int16_T rtCP_pooled_KNqaX0SAN7Zx["+str(n_taps)+"] = {" + '\n'
+    str1 = "extern const int16_T rtCP_pooled_KNqaX0SAN7Zx[" + str(
+        n_taps) + "];" + '\n'
+    str2 = "const int16_T rtCP_pooled_KNqaX0SAN7Zx[" + str(
+        n_taps) + "] = {" + '\n'
 
     head_3 = head_3 + str1 + str2
 
@@ -70,28 +77,36 @@ const uint8_T rtCP_pooled_N7sBK2Mw9Epj[8] = { 205U, 155U, 55U, 110U, 220U, 185U,
 '''
 
     #head_5
-    str1 = "extern const int16_T rtCP_pooled_OgkIRmPmpSMM["+str(n_taps)+"];" + '\n'
-    str2 = "const int16_T rtCP_pooled_OgkIRmPmpSMM["+str(n_taps)+"] = {" + '\n'
+    str1 = "extern const int16_T rtCP_pooled_OgkIRmPmpSMM[" + str(
+        n_taps) + "];" + '\n'
+    str2 = "const int16_T rtCP_pooled_OgkIRmPmpSMM[" + str(
+        n_taps) + "] = {" + '\n'
 
     head_5 = str1 + str2
-    
+
     head_6 = '''
 extern const uint8_T rtCP_pooled_PDi6MRGkSSA3;
 const uint8_T rtCP_pooled_PDi6MRGkSSA3 = 171U;
 '''
-    str1 = "extern const int16_T rtCP_pooled_PlaOfBkhFuCr["+str(n_taps)+"];"+ '\n'
-    str2 = "const int16_T rtCP_pooled_PlaOfBkhFuCr["+str(n_taps)+"] = {"+ '\n'
+    str1 = "extern const int16_T rtCP_pooled_PlaOfBkhFuCr[" + str(
+        n_taps) + "];" + '\n'
+    str2 = "const int16_T rtCP_pooled_PlaOfBkhFuCr[" + str(
+        n_taps) + "] = {" + '\n'
     head_6 = head_6 + str1 + str2
-    
-    #head_7 = 
-    str1 = "extern const int16_T rtCP_pooled_Wpx20rOZVq0F["+str(n_taps)+"];"+ '\n'
-    str2 = "const int16_T rtCP_pooled_Wpx20rOZVq0F["+str(n_taps)+"] = {"+ '\n'
+
+    #head_7 =
+    str1 = "extern const int16_T rtCP_pooled_Wpx20rOZVq0F[" + str(
+        n_taps) + "];" + '\n'
+    str2 = "const int16_T rtCP_pooled_Wpx20rOZVq0F[" + str(
+        n_taps) + "] = {" + '\n'
 
     head_7 = str1 + str2
 
-    #head_8 = 
-    str1 = "extern const int16_T rtCP_pooled_XM0RBTJG4YQ8["+str(n_taps)+"];"+ '\n'
-    str2 = "const int16_T rtCP_pooled_XM0RBTJG4YQ8["+str(n_taps)+"] = {"+ '\n'
+    #head_8 =
+    str1 = "extern const int16_T rtCP_pooled_XM0RBTJG4YQ8[" + str(
+        n_taps) + "];" + '\n'
+    str2 = "const int16_T rtCP_pooled_XM0RBTJG4YQ8[" + str(
+        n_taps) + "] = {" + '\n'
 
     head_8 = str1 + str2
 
@@ -103,8 +118,10 @@ const uint8_T rtCP_pooled_ZDi27VJOtg5z[8] = { 50U, 100U, 200U, 145U, 35U, 70U,
 extern const uint8_T rtCP_pooled_ZLAO6JieMuq9;
 const uint8_T rtCP_pooled_ZLAO6JieMuq9 = 50U;
 '''
-    str1 = "extern const int16_T rtCP_pooled_ajOyiEKWABkv["+str(n_taps)+"];"+ '\n'
-    str2 = "const int16_T rtCP_pooled_ajOyiEKWABkv["+str(n_taps)+"] = {"+ '\n'
+    str1 = "extern const int16_T rtCP_pooled_ajOyiEKWABkv[" + str(
+        n_taps) + "];" + '\n'
+    str2 = "const int16_T rtCP_pooled_ajOyiEKWABkv[" + str(
+        n_taps) + "] = {" + '\n'
 
     head_9 = head_9 + str1 + str2
 
@@ -119,8 +136,10 @@ extern const uint8_T rtCP_pooled_dEnNnIsPPoTY[8];
 const uint8_T rtCP_pooled_dEnNnIsPPoTY[8] = { 103U, 206U, 157U, 59U, 118U, 236U,
   217U, 179U } ;
 '''
-    str1 = "extern const int16_T rtCP_pooled_e4pcgdD1TyBV["+str(n_taps)+"];"+ '\n'
-    str2 = "const int16_T rtCP_pooled_e4pcgdD1TyBV["+str(n_taps)+"] = {"+ '\n'
+    str1 = "extern const int16_T rtCP_pooled_e4pcgdD1TyBV[" + str(
+        n_taps) + "];" + '\n'
+    str2 = "const int16_T rtCP_pooled_e4pcgdD1TyBV[" + str(
+        n_taps) + "] = {" + '\n'
 
     head_10 = head_10 + str1 + str2
 
@@ -140,11 +159,13 @@ const uint8_T rtCP_pooled_iew4g4hR5Emc = 205U;
 extern const uint8_T rtCP_pooled_kImaMppgcEjN;
 const uint8_T rtCP_pooled_kImaMppgcEjN = 211U;
 '''
-    str1 = "extern const int16_T rtCP_pooled_mJnUGzDBmqYT["+str(n_taps)+"];"+ '\n'
-    str2 = "const int16_T rtCP_pooled_mJnUGzDBmqYT["+str(n_taps)+"] = {"+ '\n'
+    str1 = "extern const int16_T rtCP_pooled_mJnUGzDBmqYT[" + str(
+        n_taps) + "];" + '\n'
+    str2 = "const int16_T rtCP_pooled_mJnUGzDBmqYT[" + str(
+        n_taps) + "] = {" + '\n'
 
     head_11 = head_11 + str1 + str2
-    
+
     head_12 = '''
 extern const uint8_T rtCP_pooled_mPYnLtgiiItT[8];
 const uint8_T rtCP_pooled_mPYnLtgiiItT[8] = { 152U, 49U, 98U, 196U, 137U, 19U,
@@ -194,13 +215,16 @@ const int16_T rtCP_pooled_O3hVsjLmxGGI[644] = { -80, -3, -3, -3, -3, -3, -3, -3,
   -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -4, -3, -3, -3, -3, -3, -3,
   -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -3, -80 } ;
 '''
-    data_h = [head_1, head_2, head_3, head_5, head_6, head_7, head_8, head_9, head_10, head_11]
+    data_h = [
+        head_1, head_2, head_3, head_5, head_6, head_7, head_8, head_9,
+        head_10, head_11
+    ]
 
     out_file.write(global_head)
 
     for j in range(len_y):
         out_file.write(data_h[j])
-        for i in range (0,len(y[j]),8):
+        for i in range(0, len(y[j]), 8):
             if (len(y[j]) - i) > 8:
                 string = "{:6d},{:6d},{:6d},{:6d},{:6d},{:6d},{:6d},{:6d},".format(y[j][i],\
                 y[j][i+1],y[j][i+2],y[j][i+3],y[j][i+4],y[j][i+5],y[j][i+6],y[j][i+7])
@@ -217,21 +241,21 @@ const int16_T rtCP_pooled_O3hVsjLmxGGI[644] = { -80, -3, -3, -3, -3, -3, -3, -3,
                 string = "{:6d},{:6d},{:6d},{:6d},{:6d}".format(y[j][i],y[j][i+1],y[j][i+2],\
                 y[j][i+3],y[j][i+4])
             elif (len(y[j]) - i) == 4:
-                string = "{:6d},{:6d},{:6d},{:6d}".format(y[j][i],y[j][i+1],y[j][i+2],y[j][i+3])
+                string = "{:6d},{:6d},{:6d},{:6d}".format(
+                    y[j][i], y[j][i + 1], y[j][i + 2], y[j][i + 3])
             elif (len(y[j]) - i) == 3:
-                string = "{:6d},{:6d},{:6d}".format(y[j][i],y[j][i+1],y[j][i+2])
+                string = "{:6d},{:6d},{:6d}".format(y[j][i], y[j][i + 1],
+                                                    y[j][i + 2])
             elif (len(y[j]) - i) == 2:
-                string = "{:6d},{:6d}".format(y[j][i],y[j][i+1])
+                string = "{:6d},{:6d}".format(y[j][i], y[j][i + 1])
             elif (len(y[j]) - i) == 1:
                 string = "{:6d}".format(y[j][i])
             out_file.write(string + '\n')
             string = ""
         out_file.write(" };")
         if j == 2:
-                out_file.write(head_4)
+            out_file.write(head_4)
     out_file.write(head_12)
     out_file.write(head_13)
 
-
     out_file.close
-
