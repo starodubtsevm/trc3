@@ -9,5 +9,5 @@ echo ""
 echo "Start to calculation model ..."
 echo ""
 echo ""
-python3 '../trc3_model/main.py' 
+python3 '../main.py'
 

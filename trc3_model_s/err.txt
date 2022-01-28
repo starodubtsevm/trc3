@@ -1,0 +1,8 @@
+/home/starodubtsevm/Документы/Python/TRC3-metro/trc3_model_s/main.py:80: RuntimeWarning: divide by zero encountered in double_scalars
+  y_diff8 = y_det_filt / y_f8
+/home/starodubtsevm/Документы/Python/TRC3-metro/trc3_model_s/main.py:81: RuntimeWarning: divide by zero encountered in double_scalars
+  y_diff12 = y_det_filt / y_f12
+No handles with labels found to put in legend.
+No handles with labels found to put in legend.
+No handles with labels found to put in legend.
+No handles with labels found to put in legend.

@@ -63,5 +63,6 @@ plot_fr2(y, LPF_cut, ntaps_LPF, fs_LPF, 'L')  # графики АЧХ
 
 os.system("rm -rf ../FIR_models/")
 os.system("cp -R ./FIR_models/  ../FIR_models/")
+os.system("xviewer ./Graphics/")
 
 print(time.time() - start_time, "seconds")

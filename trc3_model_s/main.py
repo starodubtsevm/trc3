@@ -7,6 +7,10 @@ from sig_gen import *
 from dc_blocker import *
 from am_det import *
 import const as c
+import sys
+
+sys.stderr = open('./err.txt', 'w')
+
 
 start_time = time.time()
 print("preparing signals")
@@ -30,7 +34,7 @@ ars_gen2 = gen(125, 0 * 1024)  # gen ars signal 2
 
 krl_gen = gen(565, 0.3 * 1024, 1)  # gen krl signal IMD
 
-noise_gen = white_noise(2 * 1024)  # gen noise signal (50 m V)
+noise_gen = white_noise(3 * 1024)  # gen noise signal (50 mV)
 
 print("")
 #-End Model config----------------------------
@@ -38,6 +42,7 @@ print("fs = " + str(fs) + " Hz")
 print("fs2 = " + str(fs2) + " Hz")
 
 #-Start Main loop------------------------------
+print("start calculaton model")
 COUNT_DECIM = 0
 for i in range(sim_point):
 
@@ -88,9 +93,13 @@ for i in range(sim_point):
 
 #for i in range (10):
 #    print(len(out_buffers[i]))
+print ("")
 print("--- %s seconds -end preparing--" % (time.time() - start_time))
+print("start plotting model")
 to_plot(out_buffers, c.inp_signal_buff)
 
 #plotSpectrum(c.inp_signal_buff)
 
+#mng = plt.get_current_fig_manager()
+#mng.resize(*mng.window.maxsize())
 plt.show()

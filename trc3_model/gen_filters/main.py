@@ -84,5 +84,6 @@ for i in range(len(freqs_MOD)):
 
 os.system("rm -rf ../FIR_models/")
 os.system("cp -R ./FIR_models/  ../FIR_models/")
+os.system("xviewer ./Graphics/")
 
 print(time.time() - start_time, "seconds")
