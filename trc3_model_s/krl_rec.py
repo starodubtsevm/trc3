@@ -27,8 +27,8 @@ class krl_receiver(object):
         self.am_det8 = am_det_env()
         self.am_det12 = am_det_env()
         self.am_det_inp = am_det_coherent(fc, c.fs)
-        self.comp8 = comparator(30, 60, 5)  #comparator 8Hz
-        self.comp12 = comparator(30, 60, 5)  #comparator 12Hz
+        self.comp8 = comparator(30, 48, 5)  #comparator 8Hz
+        self.comp12 = comparator(30, 48, 5)  #comparator 12Hz
         self.comp_sn = comparator(30, 20, 5)  #comparator sn unit
         self.sn_8filt = mean_filt(30)
         self.sn_12filt = mean_filt(30)

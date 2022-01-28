@@ -13,11 +13,11 @@ print("preparing signals")
 #-Start Model config----------------------------
 
 out_buffers = []
-[out_buffers.append([]) for i in range(11)]
+[out_buffers.append([]) for i in range(12)]
 
 #-Track line circuit---------------------------
-krl_rec = krl_receiver(565, 12)  # rec krl signal
-krl_gen = gen(565, 1 * 1024, 12)  # gen krl signal 48 mV (ADC 3.3 V, 16 Bit)
+krl_rec = krl_receiver(565, 8)  # rec krl signal
+krl_gen = gen(565, 1 * 1024, 8)  # gen krl signal 48 mV (ADC 3.3 V, 16 Bit)
 
 #-Interference-------------------------------
 krl_gen = gen(480, 10 * 1024, 12)  # gen krl signal 2
@@ -30,7 +30,7 @@ ars_gen2 = gen(125, 0 * 1024)  # gen ars signal 2
 
 krl_gen = gen(565, 0.3 * 1024, 1)  # gen krl signal IMD
 
-noise_gen = white_noise(3 * 1024)  # gen noise signal
+noise_gen = white_noise(2 * 1024)  # gen noise signal (50 m V)
 
 print("")
 #-End Model config----------------------------
