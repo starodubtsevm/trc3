@@ -30,7 +30,7 @@ class fir(object):
         indx = self.index
 
         for j in range(self.size):
-            acc += self._data[indx] * self.h[j]
+            acc+= self._data[indx] * self.h[j]
             if indx == ((self.size) - 1):
                 indx = 0
             else:

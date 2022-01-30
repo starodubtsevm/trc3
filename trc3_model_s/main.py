@@ -9,7 +9,7 @@ from am_det import *
 import const as c
 import sys
 
-sys.stderr = open('./err.txt', 'w')
+#sys.stderr = open('./err.txt', 'w')
 
 
 start_time = time.time()
@@ -24,17 +24,17 @@ krl_rec = krl_receiver(565, 8)  # rec krl signal
 krl_gen = gen(565, 1 * 1024, 8)  # gen krl signal 48 mV (ADC 3.3 V, 16 Bit)
 
 #-Interference-------------------------------
-krl_gen = gen(480, 10 * 1024, 12)  # gen krl signal 2
-krl_gen = gen(420, 4 * 1024, 8)  # gen krl signal 3
-krl_gen = gen(720, 4 * 1024, 12)  # gen krl signal 4
-krl_gen = gen(780, 4 * 1024, 8)  # gen krl signal 5
+krl_gen = gen(480, 0 * 1024, 12)  # gen krl signal 2
+krl_gen = gen(420, 0 * 1024, 8)  # gen krl signal 3
+krl_gen = gen(720, 0 * 1024, 12)  # gen krl signal 4
+krl_gen = gen(780, 0 * 1024, 8)  # gen krl signal 5
 
 ars_gen1 = gen(75, 0 * 1024)  # gen ars signal 1
 ars_gen2 = gen(125, 0 * 1024)  # gen ars signal 2
 
-krl_gen = gen(565, 0.3 * 1024, 1)  # gen krl signal IMD
+krl_gen = gen(565, 0.0 * 1024, 1)  # gen krl signal IMD
 
-noise_gen = white_noise(3 * 1024)  # gen noise signal (50 mV)
+noise_gen = white_noise(0 * 1024)  # gen noise signal (50 mV)
 
 print("")
 #-End Model config----------------------------

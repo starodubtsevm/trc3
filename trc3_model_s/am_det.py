@@ -58,11 +58,10 @@ class am_det_coherent(object):
         #yy_0  = self.f_y_0.proc(y_0) #  yy_0  = self.f_y_0.proc(buff_0)
         #yy_90 = self.f_y_90.proc(y_90) #  yy_90 = self.f_y_90.proc(buff_90)
         '''Возведение в квадрат в канале 0 и 90 градусов'''
-        y_0_square = yy_0 * yy_0 / 32768
-        y_90_square = yy_90 * yy_90 / 32768
+        y_0_square = (yy_0 * yy_0) / 32768
+        y_90_square = (yy_90 * yy_90) / 32768
         '''Извлечение квадратного корня (результат)'''
-        res = y_0_square + y_90_square
-        res = sqrt(res)
+        res = sqrt (y_0_square + y_90_square)
 
         return res
 
