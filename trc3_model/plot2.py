@@ -18,7 +18,7 @@ def to_plot(out_buffers, inp_signal_buff):
     ax2.set_title('After channel filter output  ' + str("fs = ") + str(c.fs) +
                   " Hz")
 
-    ax4 = plt.subplot(613, sharex=ax1)
+    ax4 = plt.subplot(613)
     plt.plot(c.t, out_buffers[2])
     ax4.set_title('After ask det output  ' + str("fs = ") + str(c.fs) + " Hz")
 

@@ -1,6 +1,22 @@
+main.py:80: RuntimeWarning: divide by zero encountered in double_scalars
+  y_diff8 = y_det_filt / y_f8
+main.py:81: RuntimeWarning: divide by zero encountered in double_scalars
+  y_diff12 = y_det_filt / y_f12
+/home/starodubtsevm/Документы/Python/TRC3-metro/trc3_model_s/plot2.py:27: MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previous axes currently reuses the earlier instance.  In a future version, a new instance will always be created and returned.  Meanwhile, this warning can be suppressed, and the future behavior ensured, by passing a unique label to each axes instance.
+  ax3 = plt.subplot(613)
+/home/starodubtsevm/Документы/Python/TRC3-metro/trc3_model_s/plot2.py:35: MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previous axes currently reuses the earlier instance.  In a future version, a new instance will always be created and returned.  Meanwhile, this warning can be suppressed, and the future behavior ensured, by passing a unique label to each axes instance.
+  ax6 = plt.subplot(614)
+/home/starodubtsevm/Документы/Python/TRC3-metro/trc3_model_s/plot2.py:43: MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previous axes currently reuses the earlier instance.  In a future version, a new instance will always be created and returned.  Meanwhile, this warning can be suppressed, and the future behavior ensured, by passing a unique label to each axes instance.
+  ax8 = plt.subplot(615)
+/home/starodubtsevm/Документы/Python/TRC3-metro/trc3_model_s/plot2.py:46: MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previous axes currently reuses the earlier instance.  In a future version, a new instance will always be created and returned.  Meanwhile, this warning can be suppressed, and the future behavior ensured, by passing a unique label to each axes instance.
+  ax9 = plt.subplot(615)
+/home/starodubtsevm/Документы/Python/TRC3-metro/trc3_model_s/plot2.py:49: MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previous axes currently reuses the earlier instance.  In a future version, a new instance will always be created and returned.  Meanwhile, this warning can be suppressed, and the future behavior ensured, by passing a unique label to each axes instance.
+  ax10 = plt.subplot(615)
+/home/starodubtsevm/Документы/Python/TRC3-metro/trc3_model_s/plot2.py:58: MatplotlibDeprecationWarning: Adding an axes using the same arguments as a previous axes currently reuses the earlier instance.  In a future version, a new instance will always be created and returned.  Meanwhile, this warning can be suppressed, and the future behavior ensured, by passing a unique label to each axes instance.
+  ax12 = plt.subplot(616)
 Traceback (most recent call last):
-  File "/home/starodubtsevm/Документы/Python/TRC3-metro/trc3_model_s/main.py", line 56, in <module>
-    y_dem = krl_rec.am_det_inp.demod(y_0, y_90)  # signal after demodulator
-  File "/home/starodubtsevm/Документы/Python/TRC3-metro/trc3_model_s/am_det.py", line 61, in demod
-    y_0_square = yy_0 * yy_0 >> 15
-TypeError: unsupported operand type(s) for >>: 'float' and 'int'
+  File "main.py", line 99, in <module>
+    to_plot(out_buffers, c.inp_signal_buff)
+  File "/home/starodubtsevm/Документы/Python/TRC3-metro/trc3_model_s/plot2.py", line 61, in to_plot
+    for ax in ax1, ax2, ax3, ax4, ax5, ax6, ax7, ax8, ax9, ax10, ax11, ax12:
+NameError: name 'ax4' is not defined
