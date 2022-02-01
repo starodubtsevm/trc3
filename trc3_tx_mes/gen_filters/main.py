@@ -6,12 +6,6 @@ from print_to_file2 import *
 import time
 import os
 
-#-общий входной фильтр (КРЛ)
-freqs_KRLg = 600  # центральная частота
-band_KRLg = 440  # полоса пропускания фильтра
-ntaps_KRLg = 100  # порядок фильтра
-fs_KRLg = 4000  # частота дискретизации
-
 #-фильтры 8 и 12 Гц для приема КРЛ
 freqs_MOD = 8, 12  # центральные частоты
 band_MOD = 2  # полоса пропускания фильтра
@@ -34,12 +28,6 @@ cat = ['./Graphics/', "./Headers", "../FIR_models", "./FIR_models"]
 [os.mkdir(cat[i]) for i in range(len(cat))]
 
 #--------------------------------------------------------------------------
-#-расчет и формирование *.h файлов группового входных фильтра-КРЛ----------
-taps_KRLg = bpf_fir(ntaps_KRLg, freqs_KRLg - band_KRLg / 2, freqs_KRLg + band_KRLg / 2, fs_KRLg,"fixed")
-
-prn_headers(taps_KRLg, freqs_KRLg, len(taps_KRLg), fs_KRLg, '') # *.h файлов
-prn_model_files(taps_KRLg, freqs_KRLg, len(taps_KRLg), fs_KRLg, '') # *.py файлы
-plot_fr(taps_KRLg, freqs_KRLg, band_KRLg, ntaps_KRLg, fs_KRLg, '') # графики АЧХ
 
 #-расчет и формирование *.h файлов фильтров-8 и 12 Гц---------------------
 for i in range(len(freqs_MOD)):
