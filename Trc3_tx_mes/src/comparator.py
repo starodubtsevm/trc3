@@ -1,4 +1,4 @@
-import const as c
+from conf_model import *
 
 
 #---------------------------------------
@@ -8,7 +8,7 @@ class comparator(object):
         self.thres_min = threshold_min
         self.thres_max = threshold_max
         self.prev = 0
-        self.tick = 1.0 / c.fs
+        self.tick = 1.0 / fs
         self.delay = (delay * 1e-3) / self.tick
         self.delay_count = 0
 

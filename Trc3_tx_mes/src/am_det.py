@@ -1,20 +1,17 @@
-from numpy import pi, cos, sin, sqrt
-import const as c
-from const import t, t2
+from math import pi, cos, sin, sqrt
+from conf_model import *
 from fir_filter import *
-from statistics import mean
 """
 set of AM detectors
 """
 
-
 class am_det_coherent(object):
     "coherent AM dector"
 
-    def __init__(self, fc, fs):
+    def __init__(self, f_c, f_s = fs):
         """initialization"""
         self.A = 10000
-        self.omega_fc = 2 * pi * fc
+        self.omega_fc = 2 * pi * f_c
         self.f_y_0 = fir(f_14)  # sync AM det channel 0
         self.f_y_90 = fir(f_14)  # sync AM det channel 90
         self.i = 0
@@ -27,8 +24,8 @@ class am_det_coherent(object):
     def mux(self, sample):
         """demodulator"""
         '''Локальный генератор cos и sin'''
-        sin_sig = (self.A * sin(self.omega_fc * t[self.i]))
-        cos_sig = (self.A * cos(self.omega_fc * t[self.i]))
+        sin_sig = (self.A * sin(self.omega_fc * Time[self.i]))
+        cos_sig = (self.A * cos(self.omega_fc * Time[self.i]))
         '''Умножение sample на cos и sin '''
         y_0 = sample * sin_sig
         y_90 = sample * cos_sig

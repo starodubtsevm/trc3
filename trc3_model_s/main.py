@@ -11,8 +11,8 @@ import sys
 
 #sys.stderr = open('./err.txt', 'w')
 
-start_time = time.time()
 print("preparing signals")
+prep_time = time.time()
 #-Start Model config----------------------------
 
 out_buffers = []
@@ -31,6 +31,8 @@ krl_gen = gen(780, 4 * 1024, 8)  # gen krl signal 5
 ars_gen1 = gen(75, 0 * 1024)  # gen ars signal 1
 ars_gen2 = gen(125, 0 * 1024)  # gen ars signal 2
 
+
+print("--- %s seconds -end preparing--" % (time.time() - prep_time))
 krl_gen = gen(565, 0.3 * 1024, 1)  # gen krl signal IMD
 
 noise_gen = white_noise(3 * 1024)  # gen noise signal (50 mV)
@@ -42,12 +44,14 @@ print("fs2 = " + str(fs2) + " Hz")
 
 #-Start Main loop------------------------------
 print("start calculaton model")
+calc_time = time.time()
 COUNT_DECIM = 0
-for i in range(sim_point):
+#for i in range(sim_point):
+for tick in c.inp_signal_buff:
 
     #-----main-cycle--------------------------------
     COUNT_DECIM += 1
-    y_in = krl_rec.in_filter.proc(c.inp_signal_buff[i])  # filtered signal
+    y_in = krl_rec.in_filter.proc(tick)  # filtered signal
     out_buffers[0].append(y_in)
     y_0, y_90 = krl_rec.am_det_inp.mux(y_in)  # signal after mux0 mux90
 
@@ -93,7 +97,7 @@ for i in range(sim_point):
 #for i in range (10):
 #    print(len(out_buffers[i]))
 print ("")
-print("--- %s seconds -end preparing--" % (time.time() - start_time))
+print("--- %s seconds -end preparing--" % (time.time() - calc_time))
 print("start plotting model")
 to_plot(out_buffers, c.inp_signal_buff)
 

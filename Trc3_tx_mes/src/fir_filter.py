@@ -2,7 +2,6 @@ import sys
 
 sys.path.append('./FIR_models')
 import time
-import const as c
 from FIR_8 import *
 from FIR_12 import *
 from FIR_14 import *
@@ -14,9 +13,9 @@ class fir(object):
         """initialization"""
 
         self.index = 0
-        self.h = h
-        self.size = len(self.h)
-        self._data = [0] * self.size
+        self.Coeff = h
+        self.size = len(self.Coeff)
+        self._data = [0] * len(self.Coeff)
 
     def proc(self, sample):
         """sample processed """
@@ -29,10 +28,10 @@ class fir(object):
         acc = 0  # accumulator
         indx = self.index
 
-        for j in range(self.size):
-            acc+= self._data[indx] * self.h[j]
-            if indx == ((self.size) - 1):
+        for coeff in self.Coeff:
+            acc+= self._data[indx] * coeff
+            if indx == self.size - 1:
                 indx = 0
             else:
                 indx += 1
-        return (int(acc) / 32768)  # result to 16 bit value
+        return (int(acc) >> 15)  # result to 16 bit value

@@ -1,58 +1,72 @@
 import time
 import matplotlib.pyplot as plt
+from conf_model import*
+from am_det import *
 from krl_rec import *
-from white_noise_gen import *
 from plot2 import *
 from sig_gen import *
-from am_det import *
 from spectr_analyzer import *
-import const as c
-import sys
+from white_noise_gen import *
 
+#import sys
 #sys.stderr = open('./err.txt', 'w')
 
-start_time = time.time()
+prep = time.time()
 print("preparing signals")
-#-Start Model config----------------------------
+#-Start Model config-------------------------
 
 out_buffers = []
 [out_buffers.append([]) for i in range(18)]
 
-#-Track line circuit---------------------------
+#--Конфигурирование приемника
+
 krl_rec = krl_receiver(565, 8)  # rec krl signal
-krl_gen = gen(565, 1 * 1024, 8)  # gen krl signal 48 mV (ADC 3.3 V, 16 Bit)
 
-#-Interference-------------------------------
-krl_gen = gen(480, 0.5 * 1024, 12)  # gen krl signal 2
-krl_gen = gen(420, 0.5 * 1024, 8)  # gen krl signal 3
+#- Конфигурирование генераторов
 
-ars_gen1 = gen(75, 3 * 1024)  # gen ars signal 1
-ars_gen2 = gen(125, 0 * 1024)  # gen ars signal 2
-ars_gen3 = gen(175, 1 * 1024)  # gen ars signal 3
-ars_gen4 = gen(225, 0 * 1024)  # gen ars signal 4
-ars_gen5 = gen(275, 2 * 1024)  # gen ars signal 5
-ars_gen6 = gen(325, 0 * 1024)  # gen ars signal 6
+Signals = [[420, 3 * 1024, 8 ],
+           [480, 0 * 1024, 12],
+           [565, 1 * 1024, 8 ],
+           [720, 1 * 1024, 12],
+           [780, 1 * 1024, 8 ],
+           [ 75, 3 * 1024, 0 ],
+           [125, 0 * 1024, 0 ],
+           [175, 2 * 1024, 0 ],
+           [225, 0 * 1024, 0 ],
+           [275, 1 * 1024, 0 ],
+           [325, 1.5 * 1024, 0 ]]
 
-noise_gen = white_noise(0.1 * 1024)  # gen noise signal (50 mV)
+mix_signals = [0] * sim_point
 
+for signal in Signals:
+    if signal[1] > 0:
+        y = sig_gen(signal)
+        mix_signals= [a + b for a, b in zip(mix_signals, y)]
+
+print("- %s seconds -end prep--" % (time.time() - prep))
 print("")
+
 #-End Model config----------------------------
+
 print("fs = " + str(fs) + " Hz")
 print("fs2 = " + str(fs2) + " Hz")
 
 #-Start Main loop------------------------------
+calc = time.time()
 print("start calculaton model")
+
 COUNT_DECIM = 0
-for i in range(sim_point):
+
+for tick in mix_signals:
 
     #-----main-cycle--------------------------------
     COUNT_DECIM += 1
 
-    y_0, y_90 = krl_rec.am_det_inp.mux(c.inp_signal_buff[i])
-    out_buffers[0].append(c.inp_signal_buff[i])
+    y_0, y_90 = krl_rec.am_det_inp.mux(tick)
+    out_buffers[0].append(tick)
 
-    f_ars, u_ars = krl_rec.s_a.proc(c.inp_signal_buff[i])
-    
+    f_ars, u_ars = krl_rec.s_a.proc(tick)
+
     u_ars75 = krl_rec.filt_ars75.proc(u_ars[0])
     u_ars125 = krl_rec.filt_ars125.proc(u_ars[1])
     u_ars175 = krl_rec.filt_ars175.proc(u_ars[2])
@@ -67,8 +81,8 @@ for i in range(sim_point):
     out_buffers[5].append(u_ars275)
     out_buffers[6].append(u_ars325)
 
-    if COUNT_DECIM == c.dec_coef:  # fs = 100
-        y_dem = krl_rec.am_det_inp.demod(y_0, y_90)  # signal after demodulator
+    if COUNT_DECIM == dec_coef:  # fs = 100
+        y_dem = krl_rec.am_det_inp.demod(y_0, y_90)
 
         y_det_filt = krl_rec.filt_det.proc(y_dem)
 
@@ -97,10 +111,10 @@ for i in range(sim_point):
 #for i in range (10):
 #    print(len(out_buffers[i]))
 print ("")
-print("--- %s seconds -end preparing--" % (time.time() - start_time))
+print("--- %s seconds -end calc--" % (time.time() - calc))
 print("start plotting model")
-to_plot(out_buffers, c.inp_signal_buff)
+to_plot(out_buffers, mix_signals)
 
-#plotSpectrum(c.inp_signal_buff)
+#plotSpectrum(mix_signals)
 
 plt.show()

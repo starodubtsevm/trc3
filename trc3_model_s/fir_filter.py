@@ -1,4 +1,5 @@
 import sys
+import numpy as np
 
 sys.path.append('./FIR_models')
 import time
@@ -14,9 +15,9 @@ class fir(object):
         """initialization"""
 
         self.index = 0
-        self.h = h
+        self.h = np.array(h)
         self.size = len(self.h)
-        self._data = [0] * self.size
+        self._data = np.array([0] * self.size)
 
     def proc(self, sample):
         """sample processed """
@@ -30,7 +31,7 @@ class fir(object):
         indx = self.index
 
         for j in range(self.size):
-            acc+= self._data[indx] * self.h[j]
+            acc+= self._data[indx]*self.h[j]
             if indx == ((self.size) - 1):
                 indx = 0
             else:

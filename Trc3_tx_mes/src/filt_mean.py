@@ -1,4 +1,4 @@
-import const as c
+from conf_model import *
 import numpy as np
 
 
