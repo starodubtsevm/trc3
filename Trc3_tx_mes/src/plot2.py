@@ -10,7 +10,7 @@ def to_plot(out_buffers, inp_sig_buff):
 
     ax2 = plt.subplot(311)
     ax2.plot(Time, out_buffers[0])
-    ax2.set_title('Вход модуля контроля сигналов КРЛ и АРС )  ' +
+    ax2.set_title('Вход модуля контроля сигналов КРЛ и АРС ' +
                   str("fs = ") + str(fs) + " Hz")
     ax2.grid(True)
 

@@ -33,7 +33,7 @@ def mix_signals()->list:
                [325, 1.5 * 1024, 0 ]]
 
     mix_signals = [0]*sim_point
-
+    
     for signal in Signals:
         if isinstance(signal[1], int):
             if signal[1] > 0:

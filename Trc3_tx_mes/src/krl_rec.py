@@ -1,5 +1,5 @@
 import sys
-
+from time import sleep
 sys.path.insert(0, '..')
 
 from fir_filter import *
@@ -49,11 +49,14 @@ class krl_receiver(object):
         [out_buffers.append([]) for i in range(18)]
 
         COUNT_DECIM = 0
+        COUNT_TOTAL = 0
+
 
         for tick in mix_signals:
 
             COUNT_DECIM += 1
-
+            COUNT_TOTAL += 1
+            progress(COUNT_TOTAL)
             y_0, y_90 = self.am_det_inp.mux(tick)
             out_buffers[0].append(tick)
 
@@ -99,4 +102,7 @@ class krl_receiver(object):
         #for i in range (18):
         #print(len(out_buffers[i]))
 
+        print("")
         return(out_buffers)
+
+

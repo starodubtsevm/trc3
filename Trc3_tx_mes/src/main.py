@@ -1,7 +1,10 @@
-import time
+from time import time
+from time import sleep
 from prep_model import *
 from krl_rec import *
 from plot2 import *
+
+from itertools import cycle
 
 print("")
 print("fs = " + str(fs) + " Hz")
@@ -28,8 +31,10 @@ print("")
 #- Конфигурирование и запуск приемника
 rx = time.time()
 print("старт модели измерителей АРС и КРЛ")
-
-krl_rec1 = krl_receiver(565, 8)
+print("")
+print(f"приемник {f_rx} Гц {f_mod} Гц")
+print("")
+krl_rec1 = krl_receiver(f_rx, f_mod)
 krl_rec_out_buffers = krl_rec1.proc(buf_mix_signals)
 
 print("")
@@ -39,7 +44,7 @@ print("------------------------------------")
 
 #--Построение графиков---------------
 #plot = time.time()
-print("построения выходных графиков")
+print("построение выходных графиков")
 
 to_plot(krl_rec_out_buffers, mix_signals)
 #plotSpectrum(mix_signals)

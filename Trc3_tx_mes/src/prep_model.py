@@ -2,7 +2,7 @@ from sig_gen import sig_gen
 import configparser
 
 config = configparser.ConfigParser()
-f = config.read("config_model.ini")  # читаем конфиг
+f = config.read("../config_model.ini")  # читаем конфиг
 s = config.sections()
 
 simulation_time = config['Simulation_time']['t']
@@ -10,6 +10,21 @@ fs = config['Fs']['fs']
 fs2 = config['Fs2']['fs2']
 
 xSignals = []
+
+type_of_signal = ['KRL_signals', 'ARS_signals']
+
+number_freqs = [['f1','f2','f3','f4','f5'],
+                ['f1','f2','f3','f4','f5','f6']]
+
+##print(len(number_freqs[1]))
+##exit()
+#for sig in range (len(type_of_signal)):
+#    for n in range (len(number_freqs[sig])):
+#        for i in range (len(n[sig])):
+#            k_f = config[type_of_signal[sig]][number_freqs[n][i]]
+#            l = [int(i) for i in k_f.split(",")]
+#            xSignals.append(l)
+#exit()
 
 k_f = config['KRL_signals']['f1']
 l = [int(i) for i in k_f.split(",")]
@@ -45,6 +60,11 @@ k_f = config['ARS_signals']['f6']
 l = [int(i) for i in k_f.split(",")]
 xSignals.append(l)
 
+f_rx = config['RX']['f']
+f_rx = int(f_rx)
+
+f_mod = config['RX']['fmod']
+f_mod = int(f_mod)
 
 simulation_time = int(simulation_time)
 fs = int(fs)
@@ -74,4 +94,11 @@ def mix_signals()->list:
                 mix_signals= [a + b for a, b in zip(mix_signals, y)]
 
     return mix_signals, xSignals
+
+def progress(percent=0, width=40):
+    percent = int(percent/(sim_point/100))
+    left = width * percent // 100
+    right = width - left
+    print('\r[', '#' * left, ' ' * right, ']',f' {percent:.0f}%',
+    sep='', end='', flush=True)
 
