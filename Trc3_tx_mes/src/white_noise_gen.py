@@ -1,6 +1,6 @@
 from math import sqrt
 import random
-from conf_model import *
+from prep_model import *
 
 
 #---------------------------------------

@@ -1,4 +1,3 @@
-#from conf_model import *
 from math import sin, cos
 """
 AM generator

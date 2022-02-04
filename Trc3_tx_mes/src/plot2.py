@@ -1,7 +1,7 @@
 import matplotlib.pyplot as plt
 import matplotlib.gridspec as gridspec
 from pylab import figure
-from conf_model import *
+from prep_model import *
 
 
 def to_plot(out_buffers, inp_sig_buff):

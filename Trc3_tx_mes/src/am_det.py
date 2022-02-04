@@ -1,5 +1,5 @@
 from math import pi, cos, sin, sqrt
-from conf_model import *
+from prep_model import *
 from fir_filter import *
 """
 set of AM detectors

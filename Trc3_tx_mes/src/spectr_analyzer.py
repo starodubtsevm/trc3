@@ -1,5 +1,5 @@
 from math import sin, cos, pi
-from conf_model import *
+from prep_model import *
 
 class spectr_analyzer(object):
     def __init__(self):

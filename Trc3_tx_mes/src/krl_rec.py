@@ -7,7 +7,7 @@ from am_det import *
 from comparator import *
 from filt_mean import *
 from spectr_analyzer import *
-from conf_model import *
+from prep_model import *
 """
 Trc3 receiver
 """
@@ -47,13 +47,11 @@ class krl_receiver(object):
 
         out_buffers = []
         [out_buffers.append([]) for i in range(18)]
-        #--Конфигурирование приемника
 
         COUNT_DECIM = 0
 
         for tick in mix_signals:
 
-            #-----main-cycle--------------------------------
             COUNT_DECIM += 1
 
             y_0, y_90 = self.am_det_inp.mux(tick)
@@ -83,11 +81,11 @@ class krl_receiver(object):
                 y_f8Hz = self.hz8_fir.proc(y_dem)
                 y_f12Hz = self.hz12_fir.proc(y_dem)
 
-                y_ask_det8 = self.am_det8.proc(y_f8Hz)
-                y_ask_det12 = self.am_det12.proc(y_f12Hz)
+                y_det8 = self.am_det8.proc(y_f8Hz)
+                y_det12 = self.am_det12.proc(y_f12Hz)
 
-                y_f8 = self.filt_8hz.proc(y_ask_det8)
-                y_f12 = self.filt_12hz.proc(y_ask_det12)
+                y_f8 = self.filt_8hz.proc(y_det8)
+                y_f12 = self.filt_12hz.proc(y_det12)
                 out_buffers[11].append(y_f8)
                 out_buffers[12].append(y_f12)
 
