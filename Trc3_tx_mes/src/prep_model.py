@@ -66,6 +66,9 @@ f_rx = int(f_rx)
 f_mod = config['RX']['fmod']
 f_mod = int(f_mod)
 
+tr = config['RX']['tr']
+tr = int(tr)
+
 simulation_time = int(simulation_time)
 fs = int(fs)
 fs2 = int(fs2)
