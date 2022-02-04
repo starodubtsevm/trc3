@@ -1,4 +1,4 @@
-import numpy as np
+from math import sqrt
 import random
 from conf_model import *
 
@@ -17,7 +17,7 @@ class white_noise(object):
             noise_avg_watts = self.ampl
             mean_noise = 0
             noise_volts = np.random.normal(mean_noise,
-             np.sqrt(noise_avg_watts), len(Time))
+             sqrt(noise_avg_watts), len(Time))
 
             inp_signal_buff = [
                 a + b for a, b in zip(inp_sig_buff, noise_volts) ]

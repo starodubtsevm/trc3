@@ -1,6 +1,5 @@
 from conf_model import *
-import numpy as np
-
+from numpy import mean
 
 #---------------------------------------
 class mean_filt(object):
@@ -14,5 +13,5 @@ class mean_filt(object):
         self.sum.insert(0, sample)
         self.sum.pop()
 
-        y = abs(np.mean(self.sum))
+        y = abs(mean(self.sum))
         return y

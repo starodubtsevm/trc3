@@ -17,7 +17,7 @@ class fir(object):
         self.size = len(self.Coeff)
         self._data = [0] * len(self.Coeff)
 
-    def proc(self, sample):
+    def proc(self, sample: int)->int:
         """sample processed """
 
         if len(self._data) == self.size:

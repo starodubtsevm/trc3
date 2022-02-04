@@ -1,9 +1,9 @@
-from conf_model import *
+#from conf_model import *
 from math import sin, cos
 """
 AM generator
 """
-def sig_gen (param):
+def sig_gen (param: list,Time)->list:
 
     ωfc = 6.28*int(param[0])
     ω2fc = 2*ωfc

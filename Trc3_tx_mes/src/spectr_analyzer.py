@@ -1,4 +1,4 @@
-from math import sin, cos
+from math import sin, cos, pi
 from conf_model import *
 
 class spectr_analyzer(object):
@@ -12,9 +12,9 @@ class spectr_analyzer(object):
         self.results = [0]*6
         self.freqs = [0]*6
         self.f_step_normalized = 1.0 / self.WINDOW_SIZE
-        self.twopi = 2*np.pi
+        self.twopi = 2*pi
 
-    def proc(self,sample):
+    def proc(self,sample: int)->list:
 
         if self.index == 160:
             self._data.append(sample)
