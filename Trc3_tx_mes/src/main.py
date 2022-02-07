@@ -1,15 +1,6 @@
 from time import time
-from time import sleep
-from prep_model import *
 from krl_rec import *
 from plot2 import *
-
-from itertools import cycle
-
-print("")
-print("fs = " + str(fs) + " Hz")
-print("fs2 = " + str(fs2) + " Hz")
-print("")
 
 #- Конфигурирование генераторов
 prep = time.time()

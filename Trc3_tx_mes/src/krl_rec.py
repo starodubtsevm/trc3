@@ -50,6 +50,11 @@ class krl_receiver(object):
 
         COUNT_DECIM = 0
         COUNT_TOTAL = 0
+        
+        print("")
+        print("fs = " + str(fs) + " Hz")
+        print("fs2 = " + str(fs2) + " Hz")
+        print("")
 
 
         for tick in mix_signals:
