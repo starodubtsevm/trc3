@@ -1,11 +1,11 @@
 from prep_model import *
-from numpy import mean
 
 #---------------------------------------
 class mean_filt(object):
-    def __init__(self, lenght):
+    def __init__(self, length):
         """initialization"""
-        self.sum = [0 for i in range(lenght)]
+        self.sum = [0 for i in range(length)]
+        self.length = length
 
     def proc(self, sample):
         """demodulation"""
@@ -13,5 +13,5 @@ class mean_filt(object):
         self.sum.insert(0, sample)
         self.sum.pop()
 
-        y = abs(mean(self.sum))
+        y = (sum(self.sum))/self.length
         return y

@@ -57,7 +57,8 @@ class krl_receiver(object):
             COUNT_DECIM += 1
             COUNT_TOTAL += 1
             progress(COUNT_TOTAL)
-            y_0, y_90 = self.am_det_inp.mux(tick)
+            y_in_flt = self.in_filter.proc(tick)
+            y_0, y_90 = self.am_det_inp.mux(y_in_flt)
             out_buffers[0].append(tick)
 
             f_ars, u_ars = self.s_a.proc(tick)

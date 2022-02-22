@@ -1,7 +1,6 @@
 import sys
 
 sys.path.append('./FIR_models')
-import time
 from FIR_8 import *
 from FIR_12 import *
 from FIR_14 import *

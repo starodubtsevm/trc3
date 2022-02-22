@@ -17,6 +17,11 @@ LPF_cut = 14  # частота среза
 ntaps_LPF = 400  # порядок фильтра
 fs_LPF = 4000  # частота дискретизации
 
+BPF_IN = 600  # центральная частота входного фильтра
+BAND_BPF_IN = 440  # полоса пропускания фильтра
+ntaps_BPF_IN = 100  # порядок фильтра
+fs_BPF_IN = 4000  # частота дискреизации
+
 #--------------------------------------------------------------------------
 res = []
 start_time = time.time()
@@ -28,6 +33,13 @@ cat = ['./Graphics/', "./Headers", "../FIR_models", "./FIR_models"]
 [os.mkdir(cat[i]) for i in range(len(cat))]
 
 #--------------------------------------------------------------------------
+#-расчет и формирование *.h файлов входного полосового фильтра
+taps_BPF_IN = bpf_fir(ntaps_BPF_IN, BPF_IN - BAND_BPF_IN / 2,
+                       BPF_IN + BAND_BPF_IN / 2, fs_BPF_IN,"fixed")
+
+prn_headers(taps_BPF_IN, BPF_IN, len(taps_BPF_IN), fs_BPF_IN, '')  # *.h файлов
+prn_model_files(taps_BPF_IN, BPF_IN, len(taps_BPF_IN), fs_BPF_IN, '')  # *.py файлов
+plot_fr(taps_BPF_IN, BPF_IN, BAND_BPF_IN, ntaps_BPF_IN, fs_BPF_IN, '')  # графики АЧХ
 
 #-расчет и формирование *.h файлов фильтров-8 и 12 Гц---------------------
 for i in range(len(freqs_MOD)):
