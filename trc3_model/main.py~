@@ -8,6 +8,7 @@ import const as c
 
 from sig_gen import *
 
+start_time = time.time()
 print("preparing signals")
 #-Start Model config----------------------------
 
@@ -33,7 +34,6 @@ noise_gen = white_noise(2 * 1024)  # gen noise signal
 
 print("")
 #-End Model config----------------------------
-start_time = time.time()
 
 print("fs = " + str(fs) + " Hz")
 print("fs2 = " + str(fs2) + " Hz")

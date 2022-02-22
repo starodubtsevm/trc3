@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 from time import *
 from time import sleep
 from prep_model import *
@@ -9,11 +10,12 @@ print("fs = " + str(fs) + " Hz")
 print("fs2 = " + str(fs2) + " Hz")
 print("")
 
+=======
 from time import time
 from krl_rec import *
 from plot2 import *
 
-
+>>>>>>> c788d004922c461287009560f89377df25339315
 #- Конфигурирование генераторов
 print("------------------------------------")
 print("старт расчета смеси входных сигналов")

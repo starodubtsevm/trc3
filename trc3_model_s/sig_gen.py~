@@ -7,7 +7,7 @@ class gen(object):
     def __init__(self, fc, A=0, fm=0):
         """initialization"""
         if A == 0: return
-        from math import pi, cos, sin
+        from numpy import pi, cos, sin
         import const as c
         from const import t
         self.fc = fc
