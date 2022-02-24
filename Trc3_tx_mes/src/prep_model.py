@@ -77,15 +77,23 @@ dec_coef = fs / fs2
 
 sim_point = int(simulation_time / (1.0 / fs))
 sim_point2 = int(simulation_time / (1.0 / fs2))
+sim_point3 = int(simulation_time / (1.0 /fs )/160)
+
+WINDOW_FFT = 160
 
 Time=[]
 Time2=[]
+Time3=[]
 
 for t in range (0, sim_point):
     Time.append(t*1.0/fs)
     
 for t in range (0, sim_point2):
     Time2.append(t*1.0/fs2)
+
+for t in range (0, sim_point3):
+    Time3.append(160*t*1.0/fs)
+#print(len(Time3))
 
 def mix_signals()->list:
 
