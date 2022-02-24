@@ -47,4 +47,3 @@ class spectr_analyzer(object):
         self.index = 0
         return self.freqs, self.results
 
-

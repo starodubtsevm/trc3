@@ -25,12 +25,12 @@ def to_plot(out_buffers, inp_sig_buff):
     ax7.legend()
 
     ax12 = plt.subplot(313)
-    ax12.plot(Time3, out_buffers[1], label='75 Гц')
-    ax12.plot(Time3, out_buffers[2], label='125 Гц')
-    ax12.plot(Time3, out_buffers[3], label='175 Гц')
-    ax12.plot(Time3, out_buffers[4], label='225 Гц')
-    ax12.plot(Time3, out_buffers[5], label='275 Гц')
-    ax12.plot(Time3, out_buffers[6], label='325 Гц')
+    ax12.plot(Time3, out_buffers[1], label='75 Гц' ,marker="o")
+    ax12.plot(Time3, out_buffers[2], label='125 Гц',marker="o")
+    ax12.plot(Time3, out_buffers[3], label='175 Гц',marker="o")
+    ax12.plot(Time3, out_buffers[4], label='225 Гц',marker="o")
+    ax12.plot(Time3, out_buffers[5], label='275 Гц',marker="o")
+    ax12.plot(Time3, out_buffers[6], label='325 Гц',marker="o")
 
     ax12.set_title('Сигналы на выходе модуля контроля уровня сигналов АРС\
       '+ str("fs = ") + str(fs) + " Hz")

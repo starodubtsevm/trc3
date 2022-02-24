@@ -66,19 +66,13 @@ class krl_receiver(object):
             else:
                 COUNT_FFT = 0
                 f_ars, u_ars = self.s_a.proc()
-                u_ars75 =  u_ars[0]
-                u_ars125 = u_ars[1]
-                u_ars175 = u_ars[2]
-                u_ars225 = u_ars[3]
-                u_ars275 = u_ars[4]
-                u_ars325 = u_ars[5]
 
-                out_buffers[1].append(u_ars75)
-                out_buffers[2].append(u_ars125)
-                out_buffers[3].append(u_ars175)
-                out_buffers[4].append(u_ars225)
-                out_buffers[5].append(u_ars275)
-                out_buffers[6].append(u_ars325)
+                out_buffers[1].append(u_ars[0])
+                out_buffers[2].append(u_ars[1])
+                out_buffers[3].append(u_ars[2])
+                out_buffers[4].append(u_ars[3])
+                out_buffers[5].append(u_ars[4])
+                out_buffers[6].append(u_ars[5])
 
             if COUNT_DECIM == dec_coef:  # fs = 100
                 y_dem = self.am_det_inp.demod(y_0, y_90)
