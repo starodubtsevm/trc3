@@ -33,4 +33,4 @@ class fir(object):
                 indx = 0
             else:
                 indx += 1
-        return int(acc) >> 15
+        return (int(acc) >> 15)

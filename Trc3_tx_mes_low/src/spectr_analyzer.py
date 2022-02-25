@@ -40,7 +40,7 @@ class spectr_analyzer(object):
             for n in n_range:
                 y = filt_signal[n] + w_real * d1 - d2
                 d2, d1 = d1, y
-            self.results[N] = int((d2**2 + d1**2 - w_real * d1 * d2)/1000000)
+            self.results[N] = int((d2*d2 + d1*d1 - w_real * d1 * d2)/300000)
             self.freqs[N] = int(f * fs)
             N+= 1
 

@@ -95,7 +95,7 @@ def mix_signals()->list:
 
     return mix_signals, xSignals
 
-def progress(percent=0, width=40):
+defprogress(percent=0, width=40):
     percent = int(percent/(sim_point/100))
     left = width * percent // 100
     right = width - left

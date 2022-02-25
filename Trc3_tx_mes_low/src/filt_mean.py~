@@ -13,4 +13,5 @@ class mean_filt(object):
         self.sum.insert(0, sample)
         self.sum.pop()
 
-        return sum(self.sum)/self.length
+        y = (sum(self.sum))/self.length
+        return y

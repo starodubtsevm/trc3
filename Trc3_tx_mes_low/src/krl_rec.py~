@@ -68,7 +68,7 @@ class krl_receiver(object):
                 for i in range (len(u_ars)):
                     out_buffers[i+1].append(u_ars[i])
 
-            if COUNT_DECIM == DEC_COEF:
+            if COUNT_DECIM == dec_coef:
                 y_dem = self.am_det_inp.demod(y_0, y_90)
 
                 y_f8Hz = self.hz8_fir.proc(y_dem)

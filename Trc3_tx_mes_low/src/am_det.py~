@@ -39,6 +39,7 @@ class am_det_coherent(object):
                 self.sum_90 += self.buff_ds_90[i]
                 self.sum_0 = self.sum_0 / self.BUFF
                 self.sum_90 = self.sum_90 / self.BUFF
+
             self.buff_ds_0 = [0 for i in range(self.BUFF)]
             self.buff_ds_90 = [0 for i in range(self.BUFF)]
             self.count = 0
