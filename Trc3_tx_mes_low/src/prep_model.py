@@ -65,11 +65,11 @@ fs2 = int(fs2)
 
 dec_coef = fs / fs2
 
+WINDOW_FFT = 80 # WINDOW_SIZE ars FFT
+
 sim_point = int(simulation_time / (1.0 / fs))
 sim_point2 = int(simulation_time / (1.0 / fs2))
-sim_point3 = int(simulation_time / (1.0 /fs )/160)
-
-WINDOW_FFT = 160 # WINDOW_SIZE ars FFT
+sim_point3 = int(simulation_time / (1.0 /fs )/WINDOW_FFT)
 
 Time = []
 Time2 = []
