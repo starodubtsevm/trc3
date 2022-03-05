@@ -56,8 +56,8 @@ class krl_receiver(object):
             COUNT_TOTAL += 1
             progress(COUNT_TOTAL)
             y_in_flt = self.in_filter.proc(tick)
-            y_0, y_90 = self.am_det_inp.mux(y_in_flt)
             out_buffers[0].append(tick)
+            y_0, y_90 = self.am_det_inp.mux(y_in_flt)
 
             if COUNT_FFT < WINDOW_FFT - 1:
                 self.s_a.fill_buf(tick)
@@ -65,15 +65,10 @@ class krl_receiver(object):
             else:
                 COUNT_FFT = 0
                 f_ars, u_ars = self.s_a.proc()
+                for i in range (len(u_ars)):
+                    out_buffers[i+1].append(u_ars[i])
 
-                out_buffers[1].append(u_ars[0])
-                out_buffers[2].append(u_ars[1])
-                out_buffers[3].append(u_ars[2])
-                out_buffers[4].append(u_ars[3])
-                out_buffers[5].append(u_ars[4])
-                out_buffers[6].append(u_ars[5])
-
-            if COUNT_DECIM == dec_coef:  # fs = 100
+            if COUNT_DECIM == DEC_COEF:
                 y_dem = self.am_det_inp.demod(y_0, y_90)
 
                 y_f8Hz = self.hz8_fir.proc(y_dem)
@@ -99,5 +94,4 @@ class krl_receiver(object):
 
         print("")
         return(out_buffers)
-
 

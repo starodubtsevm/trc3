@@ -63,13 +63,13 @@ simulation_time = int(simulation_time)
 fs = int(fs)
 fs2 = int(fs2)
 
-dec_coef = fs / fs2
+DEC_COEF = fs / fs2
+
+WINDOW_FFT = 80 # WINDOW_SIZE ars FFT
 
 sim_point = int(simulation_time / (1.0 / fs))
 sim_point2 = int(simulation_time / (1.0 / fs2))
-sim_point3 = int(simulation_time / (1.0 /fs )/160)
-
-WINDOW_FFT = 160 # WINDOW_SIZE ars FFT
+sim_point3 = int(simulation_time / (1.0 /fs )/WINDOW_FFT)
 
 Time = []
 Time2 = []
@@ -87,7 +87,7 @@ for t in range (0, sim_point3):
 def mix_signals()->list:
 
     mix_signals = [0]*sim_point
-    
+
     for signal in xSignals:
             if int(signal[1]) > 0:
                 y = sig_gen(signal,Time)
