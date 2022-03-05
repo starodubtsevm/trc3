@@ -14,13 +14,13 @@ fs_MOD = 100  # частота дискретизации
 
 #-ФНЧ после когерентного детектора
 LPF_cut = 14  # частота среза
-ntaps_LPF = 100  # порядок фильтра
+ntaps_LPF = 80  # порядок фильтра
 fs_LPF = 2000  # частота дискретизации
 
 BPF_IN = 600  # центральная частота входного фильтра
-BAND_BPF_IN = 440  # полоса пропускания фильтра
-ntaps_BPF_IN = 50  # порядок фильтра
-fs_BPF_IN = 2000  # частота дискреизации
+BAND_BPF_IN = 460  # полоса пропускания фильтра
+ntaps_BPF_IN = 45  # порядок фильтра
+fs_BPF_IN = 2000  # частота дискретизации
 
 #--------------------------------------------------------------------------
 res = []
@@ -59,6 +59,6 @@ plot_fr2(taps_LPF, LPF_cut, ntaps_LPF, fs_LPF, 'L')  # графики АЧХ
 
 os.system("rm -rf ../FIR_models/")
 os.system("cp -R ./FIR_models/  ../FIR_models/")
-#os.system("xviewer ./Graphics/")
+os.system("xviewer ./Graphics/")
 
 print(time.time() - start_time, "seconds")

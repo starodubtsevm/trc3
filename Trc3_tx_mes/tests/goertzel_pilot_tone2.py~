@@ -16,6 +16,7 @@ def goertzel(samples, input_freqs):
     freqs = []
     results = []
     bins = []
+
     f_step_normalized = 1.0 / WINDOW_SIZE
 
     for freq in input_freqs:
@@ -32,6 +33,7 @@ def goertzel(samples, input_freqs):
         freqs.append(round(f_normalized * SAMPLE_RATE))
 
     return freqs, results, bins
+
 
 def plot_results(freqs, results, Time, bins):
 

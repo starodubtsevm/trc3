@@ -1,5 +1,4 @@
 from time import *
-from time import sleep
 from prep_model import *
 from krl_rec import *
 from plot2 import *
