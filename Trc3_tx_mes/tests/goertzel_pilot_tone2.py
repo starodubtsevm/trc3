@@ -7,27 +7,29 @@ SAMPLE_RATE = 2000
 WINDOW_SIZE = 80
 target_freqs = [900, 400, 600]
 input_signal = [0] * WINDOW_SIZE
+two_pi = 2 * pi
 
 #----------------------------------------------------------------------
 
-def goertzel(samples, sample_rate, freqs):
+def goertzel(samples, sample_rate, in_freqs):
 
     window_size = len(samples)
-    f_step_normalized = 1.0 / window_size
+    results = []
     bins = []
 
-    for i in range (len(freqs)):
-        bins.append(int(WINDOW_SIZE * freqs[i] / SAMPLE_RATE))
-
-    # For all the bins, calculate the DFT term
-    n_range = range(0, window_size)
     freqs = []
-    results = []
+    f_step_normalized = 1.0 / window_size
+    n_range = range(0, window_size)
+
+    for i in range (len(in_freqs)):
+        bins.append(int(WINDOW_SIZE * in_freqs[i] / SAMPLE_RATE))
+
+
     for k in bins:
         # Bin frequency and coefficients for the computation
         f = k * f_step_normalized
-        w_real = 2.0 * cos(2.0 * pi * f)
-        w_imag = sin(2.0 * pi * f)
+        w_real = 2.0 * cos(two_pi * f)
+        w_imag = sin(two_pi * f)
         # Doing the calculation on the whole sample
         d1, d2 = 0.0, 0.0
         for n in n_range:
@@ -35,14 +37,13 @@ def goertzel(samples, sample_rate, freqs):
             d2, d1 = d1, y
         results.append(int(d2**2 + d1**2 - w_real * d1 * d2))
         freqs.append(int(f * sample_rate))
-
     return freqs, results, bins
 
 def plot_results(freqs, results, Time, bins):
 
     pylab.title('Goertzel algo results')
     pylab.plot(freqs, results, 'o')
-    print (freqs, results, bins)
+#    print (freqs, results, bins)
 
     pylab.show()
 
@@ -51,33 +52,27 @@ def gen_time_ticks():
     Time = []
     for num in range (WINDOW_SIZE):
         Time.append((1 / SAMPLE_RATE) * num)
-
     return Time
 
 def gen_sin(freq, Time):
 
     sine_wave = []
     for t in Time:
-        sine_wave.append(sin(2 * 3.14 * freq * t))
-
+        sine_wave.append(sin(two_pi * freq * t))
     return sine_wave
 
 def Hann_filter(input_signal):
 
-    sine_wave_temp =[]
-    for i in range (len(input_signal)):
-        multiplier = 0.5 * (1 - cos(2*pi*i/WINDOW_SIZE))
-        x = multiplier * input_signal[i]
-        sine_wave_temp.append(x)
-
-    return sine_wave_temp
+    sine_wave =[]
+    for count, value in enumerate(input_signal):
+        sine_wave.append(0.5 * (1 - cos(two_pi * count / WINDOW_SIZE)) * (value))
+    return sine_wave
 
 #----------------------------------------------------------------------
 
 Time = gen_time_ticks()
 
 for num in range (len(target_freqs)):
-    print (target_freqs[num])
     y = gen_sin(target_freqs[num], Time)
     input_signal= [a + b for a, b in zip(input_signal, y)]
 
