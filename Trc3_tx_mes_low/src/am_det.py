@@ -1,6 +1,7 @@
 from math import cos, sin, sqrt
 from prep_model import *
 from fir_filter import *
+
 """
 set of AM detectors
 """
@@ -8,7 +9,7 @@ set of AM detectors
 class am_det_coherent(object):
     "coherent AM dector"
 
-    def __init__(self, f_c, f_s = fs):
+    def __init__(self, f_c):
         """initialization"""
         self.A = 10000
         self.BUFF = 40

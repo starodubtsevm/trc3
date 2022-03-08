@@ -18,10 +18,10 @@ def goertzel(samples, input_freqs):
     bins = []
     f_step_normalized = 1.0 / WINDOW_SIZE
 
-    for freq in input_freqs:
-        Bin = round(WINDOW_SIZE * freq / SAMPLE_RATE)
-        bins.append(Bin)
-        f_normalized = Bin * f_step_normalized
+    for num, freq in enumerate(input_freqs):
+
+        bins.append(round(WINDOW_SIZE * freq / SAMPLE_RATE))
+        f_normalized = bins[num] * f_step_normalized
         w_real = 2.0 * cos(two_pi * f_normalized)
         w_imag = sin(two_pi * f_normalized)
         d1, d2 = 0.0, 0.0
@@ -58,8 +58,8 @@ def gen_sin(freq, Time):
 def Hann_filter(input_signal):
 
     sine_wave =[]
-    for count, value in enumerate(input_signal):
-        sine_wave.append(0.5 * (1 - cos(two_pi * count / WINDOW_SIZE)) * (value))
+    for tick, value in enumerate(input_signal):
+        sine_wave.append(0.5 * (1 - cos(two_pi * tick / WINDOW_SIZE)) * (value))
     return sine_wave
 
 #----------------------------------------------------------------------
@@ -73,5 +73,4 @@ for num in range (len(target_freqs)):
 sine_waves_after_Hann_filter = Hann_filter(input_signal)
 freqs, results, bins = goertzel(sine_waves_after_Hann_filter, target_freqs)
 plot_results(freqs, results, Time, bins)
-
 

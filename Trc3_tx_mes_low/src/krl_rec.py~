@@ -28,7 +28,6 @@ class krl_receiver(object):
         self.am_det_inp = am_det_coherent(fc, fs)
         self.comp8 = comparator(tr * 1.6, tr, 5)  #comparator 8Hz
         self.comp12 = comparator(tr * 1.6, tr, 5)  #comparator 12Hz
-#        self.comp_sn = comparator(30, 20, 5)  #comparator sn unit
         self.filt_8hz = mean_filt(25)
         self.filt_12hz = mean_filt(25)
         self.s_a = spectr_analyzer()

@@ -14,6 +14,7 @@ class spectr_analyzer(object):
         self.f_step_normalized = 1.0 / self.WINDOW_SIZE
         self.twopi = 2*pi
         self.count = 0
+        self.fs = fs
 
     def fill_buf(self, sample: int)->list:
 
