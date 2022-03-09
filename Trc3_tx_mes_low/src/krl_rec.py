@@ -13,12 +13,12 @@ Trc3 receiver
 """
 
 
-class KrlReceiver(object):
+class CrlReceiver(object):
     def __init__(self, fc, fm):
         """initialization"""
         self.fc = fc
         self.fm = fm
-        
+
         self.hz8_fir = fir(f_8)  # 8Hz bpf
         self.hz12_fir = fir(f_12)  # 12Hz bpf
         self.fir_15 = fir(f_14)  # 15Hz lpf

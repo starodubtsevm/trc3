@@ -7,8 +7,8 @@ prep = time()
 # ------------------------------------
 print("------------------------------------")
 print("")
-print("Fs = " + str(fs) + " Hz")
-print("Fs2 = " + str(fs2) + " Hz")
+print("FS = " + str(fs) + " Hz")
+print("FS2 = " + str(fs2) + " Hz")
 print("WINDOW_FFT = " + str(WINDOW_FFT))
 print("")
 
@@ -35,8 +35,8 @@ print(f"приемник {f_rx} Гц {f_mod} Гц")
 print("")
 
 rx = time()
-krl_rec1 = KrlReceiver(f_rx, f_mod)
-krl_rec_out_buffers = krl_rec1.proc(buf_mix_signals)
+receiver1 = CrlReceiver(f_rx, f_mod)
+crl_rec_out_buffers = receiver1.proc(buf_mix_signals)
 print("время расчета - %s sec " % round((time()-rx), 2))
 
 print("")
@@ -47,7 +47,7 @@ print("------------------------------------")
 #plot = time.time()
 print("построение выходных графиков")
 
-to_plot(krl_rec_out_buffers, input_signals, 1)
+to_plot(crl_rec_out_buffers, input_signals, 1)
 #plotSpectrum(mix_signals)
 
 #print("время расчета - %s sec " % (t   ime.time()-plot))

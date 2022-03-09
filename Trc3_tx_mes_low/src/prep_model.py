@@ -2,7 +2,7 @@ from sig_gen import sig_gen
 import configparser
 import os
 
-example_config = """
+EXAMPLE_CONFIG = """
 # конфигурационный файл для построения модели измерителей КРЛ и АРС
 # config_model.ini
 [Simulation_time]
@@ -38,37 +38,41 @@ tr= 43
 def read_config() -> list:
 
     xSignals = []
+    type_data = ('KRL_signals', 'ARS_signals')
+    PATH = "../config_model.ini"
 
     try:
         config = configparser.ConfigParser()
-        f = config.read("../config_model.ini")
-        simulation_time = int(config['Simulation_time']['t'])
-        fs = int(config['Fs']['fs'])
-        fs2 = int(config['Fs2']['fs2'])
-        f_rx = int(config['RX']['f'])
-        f_mod = int(config['RX']['fmod'])
-        tr = int(config['RX']['tr'])
+        configuration = config.read(PATH)
 
-        type_signal = ['KRL_signals', 'ARS_signals']
+        SIMULATION_TIME = int(config['Simulation_time']['t'])
+        FS = int(config['Fs']['fs'])
+        FS2 = int(config['Fs2']['fs2'])
+        F_RX = int(config['RX']['f'])
+        F_MOD = int(config['RX']['fmod'])
+        TR = int(config['RX']['tr'])
+#        WINDOW_F = int(config['FFT']['window'])
+#        BINS =
 
-        for count, signals in enumerate (type_signal):
-            freqs = list(config[type_signal[count]])
+        for count, data in enumerate(type_data):
+            freqs = list(config[type_data[count]])
             for freq in freqs:
-                string = config[signals][freq]
+                string = config[data][freq]
                 xSignals.append([int(item) for item in string.split(",")])
-    except:
-        print ("Ошибка чтения конфигурации!")
-        print ("Создаю файл конфигурации для примера.")
-        os.system("rm -rf ../config_model.ini")
-        out_file = open("../config_model.ini", "wt")
-        out_file.write(example_config)
-        out_file.close
-        print("")
-        print("Создаю новый конфигурационный файл ../config_model.ini")
-        print("")
-        print("Настройте конфигурационный файл.")
-        exit()
-    return simulation_time, fs, fs2, f_rx, f_mod, tr, xSignals
+    except Exception:
+        print("Ошибка чтения файла конфигурации!")
+        try:
+            os.system("rm -rf PATH")
+            out_file = open(PATH, "wt")
+            out_file.write(EXAMPLE_CONFIG)
+            out_file.close
+            print("Создаю новый конфигурационный файл... " + PATH)
+            print("Настройте конфигурационный файл.")
+            exit()
+        except:
+            print("Ошибка работы с файлом!")
+            exit()
+    return SIMULATION_TIME, FS, FS2, F_RX, F_MOD, TR, xSignals
 
 
 def input_signals(mix_signals, xSignals) -> list:
@@ -81,17 +85,19 @@ def input_signals(mix_signals, xSignals) -> list:
 
 
 def progress(sim_point, percent=0, width=40):
+
     percent = int(percent/(sim_point/100))
     left = width * percent // 100
     right = width - left
     print('\r[', '#' * left, ' ' * right, ']', f' {percent:.0f}%',
     sep='', end='', flush=True)
 
+
 simulation_time, fs, fs2, f_rx, f_mod, tr, xSignals = read_config()
 
 PERIOD_S = 1.0 / fs
 SIM_POINT = int(simulation_time / PERIOD_S)
 DEC_COEF = int(fs / fs2)
-WINDOW_FFT = 80  
+WINDOW_FFT = 80
 mix_signals = [0] * SIM_POINT
 Time = tuple(n * PERIOD_S for n in range(0, SIM_POINT))
