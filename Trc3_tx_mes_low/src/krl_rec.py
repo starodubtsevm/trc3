@@ -1,23 +1,24 @@
 import sys
-from time import sleep
-sys.path.insert(0, '..')
 
 from fir_filter import *
 from am_det import *
-from comparator import *
+from comparator import comparator
 from filt_mean import *
 from spectr_analyzer import *
 from prep_model import *
+
+sys.path.insert(0, '..')
 """
 Trc3 receiver
 """
 
-class krl_receiver(object):
+
+class KrlReceiver(object):
     def __init__(self, fc, fm):
         """initialization"""
         self.fc = fc
         self.fm = fm
-
+        
         self.hz8_fir = fir(f_8)  # 8Hz bpf
         self.hz12_fir = fir(f_12)  # 12Hz bpf
         self.fir_15 = fir(f_14)  # 15Hz lpf
@@ -25,19 +26,15 @@ class krl_receiver(object):
 
         self.am_det8 = am_det_env()
         self.am_det12 = am_det_env()
-        self.am_det_inp = am_det_coherent(fc, fs)
+        self.am_det_inp = am_det_coherent(self.fc)
         self.comp8 = comparator(tr * 1.6, tr, 5)  #comparator 8Hz
         self.comp12 = comparator(tr * 1.6, tr, 5)  #comparator 12Hz
-        self.comp_sn = comparator(30, 20, 5)  #comparator sn unit
-        self.sn_8filt = mean_filt(30)
-        self.sn_12filt = mean_filt(30)
         self.filt_8hz = mean_filt(25)
         self.filt_12hz = mean_filt(25)
         self.s_a = spectr_analyzer()
 
-
-    def proc(self,mix_signals: list) ->list:
-
+    def proc(self, mix_signals: list) -> list:
+        """main model loop (ISR)"""
         out_buffers = []
         [out_buffers.append([]) for i in range(18)]
 
@@ -45,16 +42,11 @@ class krl_receiver(object):
         COUNT_TOTAL = 0
         COUNT_FFT = 0
 
-        print("")
-        print("fs = " + str(fs) + " Hz")
-        print("fs2 = " + str(fs2) + " Hz")
-        print("")
-
         for tick in mix_signals:
 
             COUNT_DECIM += 1
             COUNT_TOTAL += 1
-            progress(COUNT_TOTAL)
+            progress(len(mix_signals), COUNT_TOTAL)
             y_in_flt = self.in_filter.proc(tick)
             out_buffers[0].append(tick)
             y_0, y_90 = self.am_det_inp.mux(y_in_flt)
@@ -65,7 +57,7 @@ class krl_receiver(object):
             else:
                 COUNT_FFT = 0
                 f_ars, u_ars = self.s_a.proc()
-                for i in range (len(u_ars)):
+                for i in range(len(u_ars)):
                     out_buffers[i+1].append(u_ars[i])
 
             if COUNT_DECIM == DEC_COEF:

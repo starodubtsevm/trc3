@@ -4,9 +4,12 @@ from pylab import figure
 from prep_model import *
 
 
-def to_plot(out_buffers, inp_sig_buff):
+def to_plot(out_buffers, inp_sig_buff,n):
 
-    figure(1)
+    Time2 = Time[::DEC_COEF]
+    Time3 = Time[::WINDOW_FFT]
+    
+    figure(n)
 
     ax2 = plt.subplot(311)
     ax2.plot(Time, out_buffers[0])

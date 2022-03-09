@@ -1,5 +1,5 @@
 from time import *
-from time import sleep
+#from time import sleep
 from prep_model import *
 from krl_rec import *
 from plot2 import *
@@ -48,7 +48,7 @@ print("построение выходных графиков")
 to_plot(krl_rec_out_buffers, mix_signals)
 #plotSpectrum(mix_signals)
 
-#print("время расчета - %s sec " % (time.time()-plot))
+#print("время расчета - %s sec " % (t   ime.time()-plot))
 print("")
 print("------------------------------------")
 #------------------------------------
