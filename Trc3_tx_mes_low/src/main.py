@@ -1,7 +1,8 @@
 from time import time
-from prep_model import *
+from prep_model import fs, fs2, WINDOW_FFT
 from krl_rec import *
 from plot2 import *
+
 
 prep = time()
 # ------------------------------------
@@ -18,7 +19,7 @@ print("старт расчета смеси входных сигналов")
 print("")
 
 buf_mix_signals, Signals = input_signals(mix_signals, xSignals)
-print("время расчета - %s sec " % round((time() - prep),2))
+print("время расчета - %s sec " % round((time() - prep), 2))
 
 print("")
 print("сгенерированные сигналы")

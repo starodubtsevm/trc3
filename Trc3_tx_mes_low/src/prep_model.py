@@ -5,9 +5,7 @@ import configparser
 def read_config() -> list:
 
     config = configparser.ConfigParser()
-    f = config.read("../config_model.ini")  # читаем конфиг
-    s = config.sections()
-    
+    f = config.read("../config_model.ini")
     simulation_time = int(config['Simulation_time']['t'])
     fs = int(config['Fs']['fs'])
     fs2 = int(config['Fs2']['fs2'])
@@ -16,15 +14,21 @@ def read_config() -> list:
     tr = int(config['RX']['tr'])
 
     xSignals = []
-    
-    for signal in ('f1', 'f2', 'f3', 'f4', 'f5'):
-        string = config['KRL_signals'][signal]
-        xSignals.append([int(i) for i in string.split(",")])
+    type_signal = ['KRL_signals', 'ARS_signals']
 
-    for signal in ('f1', 'f2', 'f3', 'f4', 'f5', 'f6'):
-        string = config['ARS_signals'][signal]
-        xSignals.append([int(i) for i in string.split(",")])
+    try:
+        for count, signals in enumerate (type_signal):
+            freqs = list(config[type_signal[count]])
+            for freq in freqs:
+                string = config[signals][freq]
+                xSignals.append([int(item) for item in string.split(",")])
+    except:
+        print ("Ошибка чтения конфигурации.")
+        print ("Создаю файл конфигурации для примера")
+        
 
+        
+        exit()
     return simulation_time, fs, fs2, f_rx, f_mod, tr, xSignals
 
 
