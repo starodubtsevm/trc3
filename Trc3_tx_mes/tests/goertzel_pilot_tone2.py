@@ -4,8 +4,8 @@ import pylab
 
 
 SAMPLE_RATE = 2000
-WINDOW_SIZE = 80
-target_freqs = [900, 400, 600]
+WINDOW_SIZE = 361
+target_freqs = [420, 480, 565, 720, 780, 393, 803]
 input_signal = [0] * WINDOW_SIZE
 two_pi = 2 * pi
 
@@ -22,8 +22,7 @@ def goertzel(samples, sample_rate, in_freqs):
     n_range = range(0, window_size)
 
     for i in range (len(in_freqs)):
-        bins.append(int(WINDOW_SIZE * in_freqs[i] / SAMPLE_RATE))
-
+        bins.append(round(WINDOW_SIZE * in_freqs[i] / SAMPLE_RATE))
 
     for k in bins:
         # Bin frequency and coefficients for the computation
@@ -43,7 +42,7 @@ def plot_results(freqs, results, Time, bins):
 
     pylab.title('Goertzel algo results')
     pylab.plot(freqs, results, 'o')
-#    print (freqs, results, bins)
+    print (freqs, results, bins)
 
     pylab.show()
 
@@ -72,9 +71,11 @@ def Hann_filter(input_signal):
 
 Time = gen_time_ticks()
 
+# Working signals
 for num in range (len(target_freqs)):
     y = gen_sin(target_freqs[num], Time)
     input_signal= [a + b for a, b in zip(input_signal, y)]
+
 
 sine_waves_after_Hann_filter = Hann_filter(input_signal)
 freqs, results, bins = goertzel(sine_waves_after_Hann_filter, SAMPLE_RATE, target_freqs)
