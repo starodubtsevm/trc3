@@ -38,7 +38,7 @@ tr= 43
 def read_config() -> list:
 
     xSignals = []
-    type_data = ('KRL_signals', 'ARS_signals')
+    type_data = ('KRL_signal', 'ARS_signals')
     PATH = "../config_model.ini"
 
     try:
@@ -59,17 +59,17 @@ def read_config() -> list:
             for freq in freqs:
                 string = config[data][freq]
                 xSignals.append([int(item) for item in string.split(",")])
-    except Exception:
+    except KeyError:
         print("Ошибка чтения файла конфигурации!")
         try:
             os.system("rm -rf PATH")
-            out_file = open(PATH, "wt")
+            out_file = open(PATH, "rt")
             out_file.write(EXAMPLE_CONFIG)
             out_file.close
             print("Создаю новый конфигурационный файл... " + PATH)
             print("Настройте конфигурационный файл.")
             exit()
-        except:
+        except OSError:
             print("Ошибка работы с файлом!")
             exit()
     return SIMULATION_TIME, FS, FS2, F_RX, F_MOD, TR, xSignals
