@@ -1,5 +1,5 @@
 from time import time
-from prep_model import fs, fs2, WINDOW_FFT
+from prep_model import fs, fs2
 from krl_rec import *
 from plot2 import *
 
@@ -9,7 +9,7 @@ print("------------------------------------")
 print("")
 print("FS = " + str(fs) + " Hz")
 print("FS2 = " + str(fs2) + " Hz")
-print("WINDOW_FFT = " + str(WINDOW_FFT))
+print("WINDOW_FFT = " + str(window))
 print("")
 
 # Конфигурирование генераторов

@@ -6,8 +6,8 @@ from prep_model import *
 
 def to_plot(out_buffers, inp_sig_buff,n):
 
-    Time2 = Time[::DEC_COEF]
-    Time3 = Time[::WINDOW_FFT]
+    Time2 = Time[::dec_coef]
+    Time3 = Time[::window]
     
     figure(n)
 

@@ -40,6 +40,7 @@ window=80
 bins=3,5,7,9,11,13
 """
 
+
 def read_config() -> list:
 
     type_sig = ('KRL_signals', 'ARS_signals')
@@ -50,20 +51,20 @@ def read_config() -> list:
         config = configparser.ConfigParser()
         configuration = config.read(PATH)
 
-        simulation_time = int(config['Simulation_time']['t'])
         fs = int(config['Fs']['fs'])
-        fs2 = int(config['Fs2']['fs2'])
         f_rx = int(config['RX']['f'])
+        fs2 = int(config['Fs2']['fs2'])
         f_mod = int(config['RX']['fmod'])
         threshold = int(config['RX']['tr'])
         window = int(config['FFT']['window'])
-        bins = list(map(int,config['FFT']['bins'].split(",")))
+        simulation_time = int(config['Simulation_time']['t'])
+        bins = tuple(map(int, config['FFT']['bins'].split(",")))
 
         for count, data in enumerate(type_sig):
             freqs = list(config[type_sig[count]])
             for freq in freqs:
-                string = config[data][freq]
-                xSignals.append([int(item) for item in string.split(",")])
+                xSignals.append([int(item) 
+                for item in config[data][freq].split(",")])
 
     except KeyError:
         print("Ошибка чтения файла конфигурации!")
@@ -79,18 +80,18 @@ def read_config() -> list:
 
             print("Ошибка работы с файлом!")
             sys.exit()
-    return simulation_time, fs, fs2, f_rx, f_mod, threshold, xSignals, bins
 
-
+    return simulation_time, fs, fs2, f_rx, f_mod, threshold, xSignals, bins, window
 
 
 def input_signals(mix_signals, xSignals) -> list:
 
     for signal in xSignals:
-        if int(signal[1]) > 0:
+        if signal[1] > 0:
             mix_signals = [a + b for a, b in zip(mix_signals,
             sig_gen(signal, Time))]
     return mix_signals, xSignals
+
 
 def progress(sim_point, percent=0, width=40):
 
@@ -101,11 +102,9 @@ def progress(sim_point, percent=0, width=40):
     sep='', end='', flush=True)
 
 
-simulation_time, fs, fs2, f_rx, f_mod, threshold, xSignals, bins = read_config()
+simulation_time, fs, fs2, f_rx, f_mod, threshold, xSignals, bins, window = read_config()
 
-PERIOD_S = 1.0 / fs
-SIM_POINT = int(simulation_time / PERIOD_S)
-DEC_COEF = int(fs / fs2)
-WINDOW_FFT = 80
+SIM_POINT = int(simulation_time * fs)
+dec_coef = int(fs / fs2)
 mix_signals = [0] * SIM_POINT
-Time = tuple(n * PERIOD_S for n in range(0, SIM_POINT))
+Time = tuple(n / fs for n in range(0, SIM_POINT))

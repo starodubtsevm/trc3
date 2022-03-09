@@ -1,10 +1,11 @@
 from math import sin, cos, pi
 from prep_model import *
 
+
 class spectr_analyzer(object):
     def __init__(self):
         """initialization"""
-        self.WINDOW_SIZE = WINDOW_FFT
+        self.WINDOW_SIZE = window
         self.BINS = bins
         self.SAMPLE_RATE = fs
         self._data = [0] * self.WINDOW_SIZE
@@ -16,11 +17,13 @@ class spectr_analyzer(object):
         self.count = 0
         self.fs = fs
 
+
     def fill_buf(self, sample: int) -> list:
 
         self._data[self.index] = sample
         self.index += 1
 
+        
     def proc(self)->list:
         self.count+=1
         filt_signal = []
@@ -47,4 +50,3 @@ class spectr_analyzer(object):
 
         self.index = 0
         return self.freqs, self.results
-
