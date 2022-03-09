@@ -34,35 +34,39 @@ f6= 325, 0, 0
 f= 565
 fmod= 8
 tr= 43
+
+[FFT]
+window=80
+bins=3,5,7,9,11,13
 """
 
 def read_config() -> list:
 
-    xSignals = []
-    type_data = ('KRL_signals', 'ARS_signals')
+    type_sig = ('KRL_signals', 'ARS_signals')
     PATH = "../config_model.ini"
+    xSignals = []
 
     try:
         config = configparser.ConfigParser()
         configuration = config.read(PATH)
 
-        SIMULATION_TIME = int(config['Simulation_time']['t'])
-        FS = int(config['Fs']['fs'])
-        FS2 = int(config['Fs2']['fs2'])
-        F_RX = int(config['RX']['f'])
-        F_MOD = int(config['RX']['fmod'])
-        TR = int(config['RX']['tr'])
-#        WINDOW_F = int(config['FFT']['window'])
-#        BINS =
+        simulation_time = int(config['Simulation_time']['t'])
+        fs = int(config['Fs']['fs'])
+        fs2 = int(config['Fs2']['fs2'])
+        f_rx = int(config['RX']['f'])
+        f_mod = int(config['RX']['fmod'])
+        threshold = int(config['RX']['tr'])
+        window = int(config['FFT']['window'])
+        bins = list(map(int,config['FFT']['bins'].split(",")))
 
-        for count, data in enumerate(type_data):
-            freqs = list(config[type_data[count]])
+        for count, data in enumerate(type_sig):
+            freqs = list(config[type_sig[count]])
             for freq in freqs:
                 string = config[data][freq]
                 xSignals.append([int(item) for item in string.split(",")])
+
     except KeyError:
         print("Ошибка чтения файла конфигурации!")
-
         try:
             os.system("rm -rf PATH")
             with open(PATH, "wt") as file:
@@ -75,7 +79,9 @@ def read_config() -> list:
 
             print("Ошибка работы с файлом!")
             sys.exit()
-    return SIMULATION_TIME, FS, FS2, F_RX, F_MOD, TR, xSignals
+    return simulation_time, fs, fs2, f_rx, f_mod, threshold, xSignals, bins
+
+
 
 
 def input_signals(mix_signals, xSignals) -> list:
@@ -86,7 +92,6 @@ def input_signals(mix_signals, xSignals) -> list:
             sig_gen(signal, Time))]
     return mix_signals, xSignals
 
-
 def progress(sim_point, percent=0, width=40):
 
     percent = int(percent/(sim_point/100))
@@ -96,7 +101,7 @@ def progress(sim_point, percent=0, width=40):
     sep='', end='', flush=True)
 
 
-simulation_time, fs, fs2, f_rx, f_mod, tr, xSignals = read_config()
+simulation_time, fs, fs2, f_rx, f_mod, threshold, xSignals, bins = read_config()
 
 PERIOD_S = 1.0 / fs
 SIM_POINT = int(simulation_time / PERIOD_S)

@@ -5,7 +5,7 @@ class spectr_analyzer(object):
     def __init__(self):
         """initialization"""
         self.WINDOW_SIZE = WINDOW_FFT
-        self.BINS = {3,5,7,9,11,13}
+        self.BINS = bins
         self.SAMPLE_RATE = fs
         self._data = [0] * self.WINDOW_SIZE
         self.index = 0
@@ -16,7 +16,7 @@ class spectr_analyzer(object):
         self.count = 0
         self.fs = fs
 
-    def fill_buf(self, sample: int)->list:
+    def fill_buf(self, sample: int) -> list:
 
         self._data[self.index] = sample
         self.index += 1

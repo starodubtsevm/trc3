@@ -27,8 +27,8 @@ class CrlReceiver(object):
         self.am_det8 = am_det_env()
         self.am_det12 = am_det_env()
         self.am_det_inp = am_det_coherent(self.fc)
-        self.comp8 = comparator(tr * 1.6, tr, 5)  #comparator 8Hz
-        self.comp12 = comparator(tr * 1.6, tr, 5)  #comparator 12Hz
+        self.comp8 = comparator(threshold * 1.6, threshold, 5)  #comparator 8Hz
+        self.comp12 = comparator(threshold * 1.6, threshold, 5)  #comparator 12Hz
         self.filt_8hz = mean_filt(25)
         self.filt_12hz = mean_filt(25)
         self.s_a = spectr_analyzer()
