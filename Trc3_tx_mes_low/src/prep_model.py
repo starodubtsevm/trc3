@@ -1,6 +1,7 @@
 from sig_gen import sig_gen
 import configparser
 import os
+import sys
 
 EXAMPLE_CONFIG = """
 # конфигурационный файл для построения модели измерителей КРЛ и АРС
@@ -38,7 +39,7 @@ tr= 43
 def read_config() -> list:
 
     xSignals = []
-    type_data = ('KRL_signal', 'ARS_signals')
+    type_data = ('KRL_signals', 'ARS_signals')
     PATH = "../config_model.ini"
 
     try:
@@ -61,17 +62,19 @@ def read_config() -> list:
                 xSignals.append([int(item) for item in string.split(",")])
     except KeyError:
         print("Ошибка чтения файла конфигурации!")
+
         try:
             os.system("rm -rf PATH")
-            out_file = open(PATH, "rt")
-            out_file.write(EXAMPLE_CONFIG)
-            out_file.close
+            with open(PATH, "wt") as file:
+                file.write(EXAMPLE_CONFIG)
+
             print("Создаю новый конфигурационный файл... " + PATH)
-            print("Настройте конфигурационный файл.")
-            exit()
+            print("Проверьте конфигурационный файл.")
+            sys.exit()
         except OSError:
+
             print("Ошибка работы с файлом!")
-            exit()
+            sys.exit()
     return SIMULATION_TIME, FS, FS2, F_RX, F_MOD, TR, xSignals
 
 
