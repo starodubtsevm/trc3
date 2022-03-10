@@ -3,10 +3,18 @@ import timeit
 import pylab
 
 
-SAMPLE_RATE = 2000
-WINDOW_SIZE = 361
-target_freqs = [420, 480, 565, 720, 780, 393, 803]
-input_signal = [0] * WINDOW_SIZE
+#SAMPLE_RATE = 2000
+#WINDOW_SIZE = 361
+#target_freqs = (420, 480, 565, 720, 780, 393, 803)
+
+FS = 100
+WINDOW_SIZE = int(FS * 1.5)
+SIMULATION_TIME = 1
+SIM_POINT = WINDOW_SIZE
+target_freqs = (7,8,9,11,12,13)
+input_freqs = [13,14,7,8,16]
+A = [4,4,4,8,4]
+input_signal = [0] * WINDOW_SIZE 
 two_pi = 2 * pi
 
 #----------------------------------------------------------------------
@@ -15,28 +23,13 @@ def goertzel(samples, input_freqs):
 
     freqs = []
     results = []
-    bins = []
     f_step_normalized = 1.0 / WINDOW_SIZE
 
-    freqs = []
-    f_step_normalized = 1.0 / window_size
-    n_range = range(0, window_size)
-
-    for i in range (len(in_freqs)):
-        bins.append(round(WINDOW_SIZE * in_freqs[i] / SAMPLE_RATE))
-
-    for k in bins:
-        # Bin frequency and coefficients for the computation
-        f = k * f_step_normalized
-        w_real = 2.0 * cos(two_pi * f)
-        w_imag = sin(two_pi * f)
-        # Doing the calculation on the whole sample
-
-        
-    for num, freq in enumerate(input_freqs):
-
-        bins.append(round(WINDOW_SIZE * freq / SAMPLE_RATE))
-        f_normalized = bins[num] * f_step_normalized
+    bins = tuple(WINDOW_SIZE * freq / FS for freq in input_freqs)
+    
+    for bine in bins:
+        f_normalized = bine * f_step_normalized
+        freqs.append(f_normalized * FS)
         w_real = 2.0 * cos(two_pi * f_normalized)
         w_imag = sin(two_pi * f_normalized)
         d1, d2 = 0.0, 0.0
@@ -44,7 +37,6 @@ def goertzel(samples, input_freqs):
             y = sample + w_real * d1 - d2
             d2, d1 = d1, y
         results.append(round(d2 * d2 + d1 * d1 - w_real * d1 * d2))
-        freqs.append(round(f_normalized * SAMPLE_RATE))
 
     return freqs, results, bins
 
@@ -58,16 +50,13 @@ def plot_results(freqs, results, Time, bins):
 
 def gen_time_ticks():
 
-    Time = []
-    for num in range (WINDOW_SIZE):
-        Time.append((1 / SAMPLE_RATE) * num)
-    return Time
+    return tuple(n / FS for n in range(0, SIM_POINT))
 
-def gen_sin(freq, Time):
+def gen_sin(freq, A, Time):
 
     sine_wave = []
     for t in Time:
-        sine_wave.append(sin(two_pi * freq * t))
+        sine_wave.append(A*sin(two_pi * freq * t))
     return sine_wave
 
 def Hann_filter(input_signal):
@@ -81,13 +70,13 @@ def Hann_filter(input_signal):
 
 Time = gen_time_ticks()
 
-# Working signals
-for num in range (len(target_freqs)):
-    y = gen_sin(target_freqs[num], Time)
-    input_signal= [a + b for a, b in zip(input_signal, y)]
+# Входная смесь сигналов
+for num, freq, in enumerate(input_freqs):
+    input_signal= [a + b for a, b in zip(input_signal, gen_sin(freq, A[num], Time))]
 
+pylab.plot(Time, input_signal)
+pylab.show()
 
 sine_waves_after_Hann_filter = Hann_filter(input_signal)
 freqs, results, bins = goertzel(sine_waves_after_Hann_filter, target_freqs)
 plot_results(freqs, results, Time, bins)
-
